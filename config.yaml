@@ -1,33 +1,33 @@
-# Impostazioni del bot. Modifica, fai commit, e dal run successivo valgono.
+# Bot settings. Edit, commit, and they apply from the next run.
 
-# Sport cercato sul portale: 5 = バレーボール ６人制, 6 = バレーボール ９人制
+# Sport searched on the portal: 5 = volleyball 6-a-side (バレーボール ６人制), 6 = 9-a-side (９人制)
 purpose: 5
 
-# Palestre da controllare, scritte esattamente come sul sito.
-# Altre possibili: 神奈川スポーツセンター, 南スポーツセンター, 旭スポーツセンター,
-# 緑スポーツセンター, 戸塚スポーツセンター
+# Gyms to check, written exactly as on the portal.
+# Other options: 神奈川スポーツセンター (Kanagawa), 南スポーツセンター (Minami),
+# 旭スポーツセンター (Asahi), 緑スポーツセンター (Midori), 戸塚スポーツセンター (Totsuka)
 gyms:
   - 港北スポーツセンター
 
-# Quali slot liberi ti interessano. Uno slot viene segnalato se rispetta
-# ALMENO UNA regola. Una regola vuota "{}" = tutti gli slot.
-# Campi possibili in una regola (tutti facoltativi):
-#   rooms: [第一体育室（全面）]      sale ammesse (vuoto = tutte)
-#   time_from: "13:00"            lo slot deve iniziare a quest'ora o dopo
-#   time_to: "21:00"              lo slot deve finire a quest'ora o prima
-#   min_duration_minutes: 120     durata minima dello slot
-#   weekdays: [Sat, Sun]          giorni ammessi: Mon Tue Wed Thu Fri Sat Sun
+# Which free slots you care about. A slot is reported if it matches
+# AT LEAST ONE rule. An empty rule "{}" = every slot.
+# Possible fields in a rule (all optional):
+#   rooms: [第一体育室（全面）]      allowed rooms (empty = all)
+#   time_from: "13:00"            the slot must start at this time or later
+#   time_to: "21:00"              the slot must end at this time or earlier
+#   min_duration_minutes: 120     minimum slot length
+#   weekdays: [Sat, Sun]          allowed days: Mon Tue Wed Thu Fri Sat Sun
 rules:
   - {}
-  # Esempio: solo sabato e domenica dal pomeriggio
+  # Example: only Saturday and Sunday from the afternoon
   # - weekdays: [Sat, Sun]
   #   time_from: "13:00"
 
-# Avvisare anche quando uno slot sparisce (qualcuno l'ha prenotato)?
+# Also send a message when a slot disappears (someone booked it)?
 notify_gone: false
 
-# Mandare un messaggio anche quando non è cambiato niente? (sconsigliato: ogni 10 minuti)
+# Send a message even when nothing changed? (not recommended: every 10 minutes)
 notify_no_change: false
 
-# Se il bot si rompe, avvisa al massimo una volta ogni N ore.
+# If the bot breaks, alert at most once every N hours.
 error_alert_every_hours: 6
