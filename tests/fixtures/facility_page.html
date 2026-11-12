@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>施設選択 - 市民利用施設予約システム</title>
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="dist/images/icons.svg"></use>
+    
+    
+    
+    <link rel="stylesheet" href="/user/dist/bootstrap.yihjkabj22.css" />
+    <link rel="stylesheet" href="/user/dist/bootstrap-vue.rubx34dweu.css" />
+    <link rel="stylesheet" href="/user/dist/customize.scss.jzaqfgez90.css" />
+
+    
+    <link rel="stylesheet" href="/user/dist/availability_check_apply_select_facility.scss.8k8mtiwsf0.css" />
+
+
+    <script type="text/javascript">!function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", // The SDK URL Source
+crossOrigin: "anonymous", 
+cfg: { // Application Insights Configuration
+    connectionString: 'InstrumentationKey=cc0ffb03-a37b-4b96-8958-12c165bec9f8;IngestionEndpoint=https://japaneast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://japaneast.livediagnostics.monitor.azure.com/'
+}});</script>
+    
+
+    <script>
+        // Google Analytics (gtag) — AnalyticsKey が設定されている場合のみ初期化
+        var gaAnalyticsKey = ''.trim();
+        if (gaAnalyticsKey) {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', gaAnalyticsKey);
+        }
+
+        // 利用者メニューコード　
+        var mainMenuCode = ['10','20','21','22','23','30','31','32','33','40','50','60'];
+
+        // メニュー選択時の警告メッセージ
+        var onBeforeunloadHandler = function(e) {
+            if (e.target.activeElement.localName ==="button" ||
+                e.target.activeElement.type ==="submit" ||
+                e.target.activeElement.type ==="checkbox" ||
+                e.target.activeElement.type ==="radio" ||
+                e.target.activeElement.localName ==="span" ||
+                e.target.activeElement.localName ==="a" ||
+                e.target.activeElement.type ==="button" ||
+                e.target.activeElement.localName ==="body")
+            {
+                // イベントを削除
+                window.removeEventListener('beforeunload',this.onBeforeunloadHandler,false);
+                return null;
+            }
+            else
+            {
+                let confirmationMessage =  "現在の処理を中止し、他の画面に遷移します。よろしいですか？";
+                //Gecko + IE用
+                (e || window.event).returnValue = confirmationMessage;
+                //IE以外用
+                return confirmationMessage;
+            }
+        };
+
+        // マイメニューの場合、警告メッセージがされないようにする
+        document.addEventListener('click', function(evt) {
+            let selectedMenu = evt.currentTarget.activeElement.id;
+            let exist = mainMenuCode.includes(selectedMenu);
+            if (exist || evt.target.type ==="button" ||
+                evt.target.type ==="submit" ||
+                evt.target.type ==="checkbox" ||
+                evt.target.type ==="radio" ||
+                evt.target.localName ==="span" ||
+                evt.target.localName ==="button" ||
+                evt.target.localName ==="body") {
+
+                // イベントを削除
+                window.removeEventListener('beforeunload', onBeforeunloadHandler, false);
+            }
+        }, false);
+
+        // イベントを登録
+        window.addEventListener('beforeunload', onBeforeunloadHandler, false);
+
+    </script>
+</head>
+<body>
+    <div id="app" v-cloak>
+            
+<header-partial ref="headerPartial" :model='JSON.parse("{\u0022IsSettingSystemDate\u0022:false,\u0022IsSiteClosing\u0022:false,\u0022SystemDate\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ClosureDatetime\u0022:\u00220001-01-01T00:00:00\u0022,\u0022ReleaseDatetime\u0022:\u00220001-01-01T00:00:00\u0022,\u0022DisplaySiteClosing\u0022:\u00220001/1/1(\u6708) 0:00 \uFF5E 0001/1/1(\u6708) 0:00\u0022,\u0022MunicipalityName\u0022:\u0022\u6A2A\u6D5C\u5E02\u0022,\u0022IsHome\u0022:false,\u0022IsAlreadyLogin\u0022:false,\u0022IsDisplayLogin\u0022:true,\u0022UserId\u0022:\u0022\u0022,\u0022UserName\u0022:\u0022\u0022,\u0022NickName\u0022:\u0022\u0022,\u0022MessageToUserUnReadCount\u0022:0,\u0022UserGuideUrl\u0022:null,\u0022UrlName\u0022:null,\u0022AgreementName\u0022:\u0022\u5229\u7528\u7D04\u6B3E\u0022,\u0022AgreementUrl\u0022:\u0022https://www.shisetsu.city.yokohama.lg.jp/user/doc/user_public/\u0022,\u0022FAQUrl\u0022:null,\u0022Url\u0022:\u0022AvailabilityCheckApplySelectFacility\u0022,\u0022WarningMessageId\u0022:\u0022\u0022,\u0022DisplayMailConfirm\u0022:false,\u0022AvailableFacilityList\u0022:[],\u0022ShouldShowIndividualName\u0022:true,\u0022ShouldShowGroupName\u0022:true,\u0022GroupType\u0022:0,\u0022IsSuspended\u0022:false,\u0022IsUserInfoReferencePageAccess\u0022:false}")' inline-template>
+    <div>
+
+        <form name="headerForm" v-on:keydown.enter.prevent="">
+           <header class="header-wrapper">
+    <div class="header d-flex flex-column "  style="overflow: hidden;">
+      <div id="slide-container" class="slider1">
+                      <a id="slider1" target="blank" class="item-1 item-css-1"></a>
+                      <a id="slider2" target="blank" class="item-2 item-css-2" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider3" target="blank" class="item-1 item-css-3"></a>
+                      <a id="slider4" target="blank" class="item-2 item-css-4" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider5" target="blank" class="item-1 item-css-5"></a>
+                      <a id="slider6" target="blank" class="item-2 item-css-6" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider7" target="blank" class="item-1 item-css-7"></a>
+                      <a id="slider8" target="blank" class="item-2 item-css-8" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider9" target="blank" class="item-1 item-css-9"></a>
+                      <a id="slider10" target="blank" class="item-2 item-css-10" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider11" target="blank" class="item-1 item-css-11"></a>
+                      <a id="slider12" target="blank" class="item-2 item-css-12" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider13" target="blank" class="item-1 item-css-13"></a>
+                      <a id="slider14" target="blank" class="item-2 item-css-14" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider15" target="blank" class="item-1 item-css-15"></a>
+                      <a id="slider16" target="blank" class="item-2 item-css-16" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider17" target="blank" class="item-1 item-css-17"></a>
+                      <a id="slider18" target="blank" class="item-2 item-css-18" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider19" target="blank" class="item-1 item-css-19"></a>
+                      <a id="slider20" target="blank" class="item-2 item-css-20" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider21" target="blank" class="item-1 item-css-21"></a>
+                      <a id="slider22" target="blank" class="item-2 item-css-22" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider23" target="blank" class="item-1 item-css-23"></a>
+                      <a id="slider24" target="blank" class="item-2 item-css-24" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider25" target="blank" class="item-1 item-css-25"></a>
+                      <a id="slider26" target="blank" class="item-2 item-css-26" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider27" target="blank" class="item-1 item-css-27"></a>
+                      <a id="slider28" target="blank" class="item-2 item-css-28" href="https://expo2027yokohama.or.jp/"></a>
+                      <a id="slider29" target="blank" class="item-1 item-css-29"></a>
+                      <a id="slider30" target="blank" class="item-2 item-css-30" href="https://expo2027yokohama.or.jp/"></a>
+
+                  </div>
+                  <div id="btn-left" class="slide-btn ml-2 btn-1 slide-btn-1-slider" style="font-size: 40px; cursor: pointer;">&lt;</div>
+                  <div id="btn-right" class="slide-btn mr-2 btn-2 slide-btn-2-slider" style="font-size: 40px; cursor: pointer;">&gt;</div>
+                  <div id="stop-playing-button" class="on"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQklEQVR4nGNgGAUDAv7//2/6////bCQsiCQniCZnSorBDf9RgTaSnDaaXMOowTAwGhRwMBoUIyUoTGlSCI0CBmoCAJT7AFeI2DPCAAAAAElFTkSuQmCC" alt="">停止</div>
+                  <script type="application/javascript">
+                  document.addEventListener("DOMContentLoaded", (event) => {
+  
+  
+                          const scrollInterval = 7000;
+                          const flagId = 'swiper!!';
+                          if (document.getElementById(flagId) === null) {
+                              //
+                            const click = function(event){
+                                const slide = document.getElementById('slide-container');
+                                const current = slide.className;
+                                const currentNo = Number(slide.className.replace(/[^0-9.]/g, ''));
+                                let nextNo = currentNo
+                                if (event && event.target.id === 'btn-left') {
+                                    nextNo = nextNo - 1
+                                } else {
+                                    nextNo = nextNo + 1
+                                }
+                                if (nextNo >= 30) {
+                                    slide.classList.remove(current);
+                                    slide.classList.add('slider' + (1));
+                                } else if (nextNo <= 0) {
+                                    slide.classList.remove(current);
+                                    slide.classList.add('slider' + (30));
+                                } else {
+                                    slide.classList.remove(current);
+                                    slide.classList.add('slider' + nextNo);
+                                }
+
+                                // slide.classList.add(current === 'item-1' ? 'item-2' : 'item-1');
+                                // slide.animate({
+                                //     opacity: [0, 1]
+                                // }, 500)
+                            }
+                            let interval = setInterval(click, scrollInterval);
+                            const playBtnclick = function(event){
+                                const btn = document.getElementById('stop-playing-button');
+                                if (btn.className.includes('on')) {
+                                    clearInterval(interval)
+                                    btn.innerHTML = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAlUlEQVR4nO3UMQ4BQRSA4aeQqGjdwB5A5whaZ3AONxClC0jELRxg6fQapU6ikE82Vq15k0j4q6m+SWbmTcS/T6GKEqHGGoNs+ODVBbNseINtu8EOwyx42a6nOOOKOTopcBP6WOGBPUaRAb/DBCfcsEA3MuAm9Fr0jiPG8bWw7KNQ4vIUeG6bUgNSZKTrUp9QlQrGz/YEcqgrRsr1S0YAAAAASUVORK5CYII=">再生'
+                                    btn.classList.remove('on');
+                                } else {
+                                    interval = setInterval(click, scrollInterval);
+                                    btn.classList.add('on');
+                                    btn.innerHTML = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQklEQVR4nGNgGAUDAv7//2/6////bCQsiCQniCZnSorBDf9RgTaSnDaaXMOowTAwGhRwMBoUIyUoTGlSCI0CBmoCAJT7AFeI2DPCAAAAAElFTkSuQmCC">停止'
+                                }
+                            }
+
+                            Array
+                                .from(document.getElementsByClassName('slide-btn'))
+                                .forEach((btn) => btn.addEventListener('click', click));
+                                
+                            document.getElementById('stop-playing-button').addEventListener('click', playBtnclick);
+                              //
+                              const flag = document.createElement('div');
+                              flag.id = flagId;
+                              document.body.append(flag)
+                          }
+
+                      });
+                          
+                   
+                  </script> 
+                    <div class="d-flex justify-content-between mr-sm-3">
+                        <h1>
+                            <span class="city"></span><span class="title mt-1 title-fit-content"></span>
+                        </h1>
+                        <div class="login">
+                        </div>
+                    </div>
+                    <div class="flex-grow-1"></div>
+                    <ul class="d-flex justify-content-end align-self-end mr-sm-2 mb-1">
+                            <li class="option mr-1 pb-1">
+                                <a href="https://www.shisetsu.city.yokohama.lg.jp/user/doc/user_public/" aria-hidden="true" target="_blank" rel="noopener noreferrer"
+                                type="button" class="btn btn-sm px-0 py-1 btn-link h-100 py-0">
+                                    <svg class="icon mr-1">
+                                        <use xlink:href="dist/images/icons.svg#book"></use>
+                                    </svg><span>&#x5229;&#x7528;&#x7D04;&#x6B3E;</span>
+                                </a>
+                            </li>
+                    </ul>
+                    <div class="dock-nav mr-sm-2 mb-1">
+                        <button class="btn" v-on:click.prevent="openMenu">
+                            <div class="d-flex align align-items-center">
+                                <svg class="icon mr-1">
+                                    <use xlink:href="dist/images/icons.svg#bars"></use>
+                                </svg>メニュー
+                            </div>
+                            <div class="message-count">
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- dialog(menu) -->
+                    <b-modal v-model="dialogMenuVisible" @hidden="closeMenu" size="xl" hide-footer>
+                        <template v-slot:modal-title>
+                            <div class="d-flex align-items-center">
+                                <svg class="icon mr-1 mb-0">
+                                    <use xlink:href="dist/images/icons.svg#bars"></use>
+                                </svg>
+                                <div>メニュー</div>
+                            </div>
+                        </template>
+                        <div>
+                            <ul>
+                                    <li class="mr-1">
+                                        <a href="https://www.shisetsu.city.yokohama.lg.jp/user/doc/user_public/" target="_blank" rel="noopener noreferrer"
+                                        type="button" class="btn px-0 py-1 btn-link">
+                                            <svg class="icon mr-1">
+                                                <use xlink:href="dist/images/icons.svg#book"></use>
+                                            </svg><span  aria-hidden="true">&#x5229;&#x7528;&#x7D04;&#x6B3E;</span>
+                                        </a>
+                                    </li>
+                            </ul>
+                        </div>
+                    </b-modal>
+                </div>
+            </header>
+            <!-- ダイアログ　登録状態の確認 -->
+            <b-modal v-model="dialogUserInfo" id="dialogUserInfo" size="xl">
+                <template v-slot:modal-title>
+                    <span>
+                        <svg class="icon mr-1 p-1">
+                            <use xlink:href="dist/images/icons.svg#check"></use>
+                        </svg>登録状態の確認
+                    </span>
+                </template>
+                <div class="p-2 body-dialog">
+                        <span>設定されている登録区分がありません。</span>
+
+                </div>
+                <template v-slot:modal-footer>
+                    <span class="dialog-footer">
+                        <button type="button" class="btn btn-gray"
+                                @click="dialogUserInfo = !dialogUserInfo">
+                            閉じる
+                        </button>
+                    </span>
+                </template>
+            </b-modal>
+        </form>
+    </div>
+</header-partial>
+
+<!--パンくずリスト-->
+
+<div class="breadcrumb-wrapper">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb d-flex align-items-baseline">
+                <li :class="'breadcrumb-item ' + 'done'">
+                    <span>
+                            <a v-pre href= "#" onclick="locationRedirect('Home'); return false;"
+                            onkeydown="isWhetherToPressTheSpaceEnterbar() ? locationRedirect('Home') : '';">
+                                Home
+                            </a>
+                    </span>
+                </li>
+                <li :class="'breadcrumb-item ' + 'active'">
+                    <span>
+&#x65BD;&#x8A2D;&#x9078;&#x629E;                    </span>
+                </li>
+                <li :class="'breadcrumb-item ' + ''">
+                    <span>
+&#x65BD;&#x8A2D;&#x5225;&#x7A7A;&#x304D;&#x72B6;&#x6CC1;                    </span>
+                </li>
+                <li :class="'breadcrumb-item ' + ''">
+                    <span>
+&#x6642;&#x9593;&#x5E2F;&#x5225;&#x7A7A;&#x304D;&#x72B6;&#x6CC1;                    </span>
+                </li>
+                <li :class="'breadcrumb-item ' + ''">
+                    <span>
+&#x7533;&#x8FBC;&#x5185;&#x5BB9;&#x5165;&#x529B;                    </span>
+                </li>
+                <li :class="'breadcrumb-item ' + ''">
+                    <span>
+&#x7533;&#x8FBC;&#x5B8C;&#x4E86;                    </span>
+                </li>
+        </ol>
+    </nav>
+</div>
+<!--コンテンツの内容-->
+<div id="app_page">
+<form name="myform" v-on:keydown.enter.prevent="">
+<!-- JIS規格：A: 2.4.1（G1）の対応 開始 -->
+<a href="#jisMain" style="display:none;">メインコンテンツにスキップ</a>
+<div class="application-main" id="jisMain">
+<!-- JIS規格：A: 2.4.1（G1）の対応 終了 -->
+    <div class="container container-select-facility">
+        <div class="page-header page-header-border">
+            <div class="d-flex align-items-baseline">
+                <h2 class="page-title pt-2">施設選択</h2>
+                <div class="page-help pl-3">
+                    <button type="button" class="btn btn-sm btn-gray mb-2">
+                        <svg class="icon mr-1"><use xlink:href="dist/images/icons.svg#question-circle-regular"></use></svg>画面説明
+                    </button>
+                </div>
+                <span class="sr-only">空き状況を調べたい施設を選択する画面です。</span>
+            </div>
+            <div class="page-description">
+空き状況の照会や予約をしたい施設の名称を選んで「次へ進む」を押してください。複数選択できます。            </div>
+        </div>
+        <div class="page-body p-3 page-body-custom-padding">
+                <table class="table table-bordered table-striped facilities">
+                    <thead class="title">
+                        <tr>
+                            <th>施設名<span class="badge badge-info ml-2">複数選択可</span></th>
+                            <th class="w-5r bell">お知らせ</th>
+                            <th class="w-5r facility-link">案内</th>
+                            <th class="w-5r map">地図</th>
+                            
+                            <th class="w-5r detail">詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr v-show = "showMore(0)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[0].IsChecked" :disabled="model.SelectFacilities.Facilities[0].IsDisabled" v-on:change="displayTooltip()" id="5197e806-52ee-4e60-9049-7e6191620980" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[0].IsChecked" value="true">
+                                    &#x9DB4;&#x898B;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[0].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/tsurumi-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x9DB4;&#x898B;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('1')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="7618e63d-a858-47a8-9046-f92b7802edd3" name="SelectFacilities.Facilities[0].SelectedFacility.Value" value="1">
+                            <input type="hidden" id="04e11eb4-6a2d-46b5-84ab-cc2c31b7aab7" name="SelectFacilities.Facilities[0].SelectedFacility.Text" value="&#x9DB4;&#x898B;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(1)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[1].IsChecked" :disabled="model.SelectFacilities.Facilities[1].IsDisabled" v-on:change="displayTooltip()" id="08523243-ddc3-4e01-9c49-4c94eec52f21" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[1].IsChecked" value="true">
+                                    &#x795E;&#x5948;&#x5DDD;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[1].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://kanagawa-sc.com/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x795E;&#x5948;&#x5DDD;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('2')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="46fc4610-4cc9-4908-8a8d-a255cf7c6d54" name="SelectFacilities.Facilities[1].SelectedFacility.Value" value="2">
+                            <input type="hidden" id="1bfc8e81-5495-4d0a-ad5d-d99c28d744bc" name="SelectFacilities.Facilities[1].SelectedFacility.Text" value="&#x795E;&#x5948;&#x5DDD;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(2)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[2].IsChecked" :disabled="model.SelectFacilities.Facilities[2].IsDisabled" v-on:change="displayTooltip()" id="3bc76055-29a7-48e0-aed4-5105d20964b4" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[2].IsChecked" value="true">
+                                    &#x897F;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[2].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                        <button class="btn-warning btn-icon"
+                                            v-on:click.prevent="openMessage('3', '&#x897F;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon icon-white"><use xlink:href="dist/images/icons.svg#bell"></use></svg>
+                                            <span class="sr-only">施設からのお知らせ</span>
+                                        </button>
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://www.sportsoasis.co.jp/sh47/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6A2A;&#x6D5C;&#x5E02;&#x897F;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('3')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="4d0451d3-21c9-4600-a606-fae7e4276541" name="SelectFacilities.Facilities[2].SelectedFacility.Value" value="3">
+                            <input type="hidden" id="0a4d55b8-b4b7-4fc5-92c7-7a6b805d7177" name="SelectFacilities.Facilities[2].SelectedFacility.Text" value="&#x897F;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(3)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[3].IsChecked" :disabled="model.SelectFacilities.Facilities[3].IsDisabled" v-on:change="displayTooltip()" id="0f17ed80-dc66-47f5-bd27-11538639f6bb" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[3].IsChecked" value="true">
+                                    &#x4E2D;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[3].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/naka-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6A2A;&#x6D5C;&#x5E02;&#x4E2D;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('4')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="084e8fc7-750d-4a4d-b561-1e9ce5c60ecd" name="SelectFacilities.Facilities[3].SelectedFacility.Value" value="4">
+                            <input type="hidden" id="ccc06edd-705c-46f9-9764-31d347cbac9a" name="SelectFacilities.Facilities[3].SelectedFacility.Text" value="&#x4E2D;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(4)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[4].IsChecked" :disabled="model.SelectFacilities.Facilities[4].IsDisabled" v-on:change="displayTooltip()" id="05cbb8d3-59be-413c-952c-954d5d755815" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[4].IsChecked" value="true">
+                                    &#x5357;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[4].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://www.yokohama-minamisc.jp/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x5357;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('5')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="f3f492f3-9d2d-4c11-aea8-86da862787f3" name="SelectFacilities.Facilities[4].SelectedFacility.Value" value="5">
+                            <input type="hidden" id="5d0922bb-444f-4276-8426-43fb209f9155" name="SelectFacilities.Facilities[4].SelectedFacility.Text" value="&#x5357;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(5)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[5].IsChecked" :disabled="model.SelectFacilities.Facilities[5].IsDisabled" v-on:change="displayTooltip()" id="21051d82-7d33-4149-b8d5-53a58096b122" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[5].IsChecked" value="true">
+                                    &#x6E2F;&#x5357;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[5].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/konan-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6E2F;&#x5357;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('6')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="83462565-3472-4d4e-a439-a562115139a2" name="SelectFacilities.Facilities[5].SelectedFacility.Value" value="6">
+                            <input type="hidden" id="92c30c00-e49e-4ae7-94af-489fe522b47f" name="SelectFacilities.Facilities[5].SelectedFacility.Text" value="&#x6E2F;&#x5357;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(6)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[6].IsChecked" :disabled="model.SelectFacilities.Facilities[6].IsDisabled" v-on:change="displayTooltip()" id="68a227a9-a1a2-4e43-a7cf-2f878fe5ae58" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[6].IsChecked" value="true">
+                                    &#x4FDD;&#x571F;&#x30B1;&#x8C37;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[6].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://hodogaya-sports.com/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x4FDD;&#x571F;&#x30B1;&#x8C37;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('7')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="c0b3a7e6-4991-408a-b542-3c41c167440c" name="SelectFacilities.Facilities[6].SelectedFacility.Value" value="7">
+                            <input type="hidden" id="1fccd22e-ecb6-4b2f-ae56-c4cbcbbe4675" name="SelectFacilities.Facilities[6].SelectedFacility.Text" value="&#x4FDD;&#x571F;&#x30B1;&#x8C37;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(7)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[7].IsChecked" :disabled="model.SelectFacilities.Facilities[7].IsDisabled" v-on:change="displayTooltip()" id="d66384ae-029c-4816-8072-1579187a0f2b" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[7].IsChecked" value="true">
+                                    &#x65ED;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[7].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/asahi-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6A2A;&#x6D5C;&#x5E02;&#x65ED; &#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('8')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="b35b4ce1-7154-4c56-aef5-351c5404534a" name="SelectFacilities.Facilities[7].SelectedFacility.Value" value="8">
+                            <input type="hidden" id="20b2c189-1751-4055-9b1f-4e86f19438b7" name="SelectFacilities.Facilities[7].SelectedFacility.Text" value="&#x65ED;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(8)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[8].IsChecked" :disabled="model.SelectFacilities.Facilities[8].IsDisabled" v-on:change="displayTooltip()" id="bba00a6d-b10f-4c05-8a92-0dca7d3fb9df" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[8].IsChecked" value="true">
+                                    &#x78EF;&#x5B50;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[8].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/isogo-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x78EF;&#x5B50;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('9')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="4c04fccb-5b19-49eb-a9d7-61e51f519fed" name="SelectFacilities.Facilities[8].SelectedFacility.Value" value="9">
+                            <input type="hidden" id="a44d61dd-d567-45cf-8a06-2f0ff22f29b0" name="SelectFacilities.Facilities[8].SelectedFacility.Text" value="&#x78EF;&#x5B50;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(9)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[9].IsChecked" :disabled="model.SelectFacilities.Facilities[9].IsDisabled" v-on:change="displayTooltip()" id="c2dfa041-c751-4f13-b14c-c49cd3f2f80d" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[9].IsChecked" value="true">
+                                    &#x91D1;&#x6CA2;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[9].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/kanazawa-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x91D1;&#x6CA2;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('10')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="198cee8c-83fb-4b21-9098-2280ce4c000f" name="SelectFacilities.Facilities[9].SelectedFacility.Value" value="10">
+                            <input type="hidden" id="aad91c4b-10b2-4676-bce6-c3141e50d01a" name="SelectFacilities.Facilities[9].SelectedFacility.Text" value="&#x91D1;&#x6CA2;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(10)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[10].IsChecked" :disabled="model.SelectFacilities.Facilities[10].IsDisabled" v-on:change="displayTooltip()" id="fc0c03a9-69f8-4a1e-8096-5dcfbab99412" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[10].IsChecked" value="true">
+                                    &#x6E2F;&#x5317;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[10].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://kohoku-sports.com/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6E2F;&#x5317;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('11')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="9af9d0e4-516e-4b20-8481-3525ed2f7295" name="SelectFacilities.Facilities[10].SelectedFacility.Value" value="11">
+                            <input type="hidden" id="2a247b42-b29b-4e05-8521-1331f967ca0c" name="SelectFacilities.Facilities[10].SelectedFacility.Text" value="&#x6E2F;&#x5317;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(11)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[11].IsChecked" :disabled="model.SelectFacilities.Facilities[11].IsDisabled" v-on:change="displayTooltip()" id="187a914f-c739-4005-b11f-680da75c3a8e" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[11].IsChecked" value="true">
+                                    &#x7DD1;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[11].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/midori-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6A2A;&#x6D5C;&#x5E02;&#x7DD1;&#x533A;&#x4E2D;&#x5C71;&#xFF11;&#xFF0D;&#xFF12;&#xFF19;&#xFF0D;&#xFF17;&#x3000;&#x7DD1;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('12')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="72405d64-724f-4e23-bebe-eb87c86f12b5" name="SelectFacilities.Facilities[11].SelectedFacility.Value" value="12">
+                            <input type="hidden" id="623b6a25-5749-42b5-97b5-3f20fc1a299b" name="SelectFacilities.Facilities[11].SelectedFacility.Text" value="&#x7DD1;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(12)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[12].IsChecked" :disabled="model.SelectFacilities.Facilities[12].IsDisabled" v-on:change="displayTooltip()" id="132006ce-d5d8-4176-a917-7c0456509da0" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[12].IsChecked" value="true">
+                                    &#x9752;&#x8449;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[12].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://information.konamisportsclub.jp/trust/aoba/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x9752;&#x8449;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('13')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="9e7e5a34-29bf-42f2-b015-20bc8e8c8e85" name="SelectFacilities.Facilities[12].SelectedFacility.Value" value="13">
+                            <input type="hidden" id="93d88c0f-6bf8-44e5-9284-e92b18ba7625" name="SelectFacilities.Facilities[12].SelectedFacility.Text" value="&#x9752;&#x8449;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(13)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[13].IsChecked" :disabled="model.SelectFacilities.Facilities[13].IsDisabled" v-on:change="displayTooltip()" id="5978cc00-b9f3-4441-ba7a-e6da4ec18858" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[13].IsChecked" value="true">
+                                    &#x90FD;&#x7B51;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[13].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/tsuzuki-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x90FD;&#x7B51;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('14')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="67df4ddb-77b6-488f-a4d4-763e6126e924" name="SelectFacilities.Facilities[13].SelectedFacility.Value" value="14">
+                            <input type="hidden" id="f6f92c78-55a1-46ec-a964-ddbbe25ff97d" name="SelectFacilities.Facilities[13].SelectedFacility.Text" value="&#x90FD;&#x7B51;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(14)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[14].IsChecked" :disabled="model.SelectFacilities.Facilities[14].IsDisabled" v-on:change="displayTooltip()" id="d7230282-9591-4362-b77c-e8dc445243ac" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[14].IsChecked" value="true">
+                                    &#x6238;&#x585A;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[14].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/totsuka-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6A2A;&#x6D5C;&#x5E02;&#x6238;&#x585A;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('15')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="fc169485-42e9-4652-8925-44765cbcc836" name="SelectFacilities.Facilities[14].SelectedFacility.Value" value="15">
+                            <input type="hidden" id="212d0b42-07b5-471f-a32a-f48ae5a8dc1b" name="SelectFacilities.Facilities[14].SelectedFacility.Text" value="&#x6238;&#x585A;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(15)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[15].IsChecked" :disabled="model.SelectFacilities.Facilities[15].IsDisabled" v-on:change="displayTooltip()" id="52fa1eeb-d528-4681-ba1f-2ace6805a60e" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[15].IsChecked" value="true">
+                                    &#x6804;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[15].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                        <button class="btn-warning btn-icon"
+                                            v-on:click.prevent="openMessage('16', '&#x6804;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon icon-white"><use xlink:href="dist/images/icons.svg#bell"></use></svg>
+                                            <span class="sr-only">施設からのお知らせ</span>
+                                        </button>
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/sakae-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6804;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('16')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="f8378637-d83a-4198-a8be-87431be72a84" name="SelectFacilities.Facilities[15].SelectedFacility.Value" value="16">
+                            <input type="hidden" id="c291f445-a83f-4a47-b5d5-fbc1f19d6160" name="SelectFacilities.Facilities[15].SelectedFacility.Text" value="&#x6804;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(16)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[16].IsChecked" :disabled="model.SelectFacilities.Facilities[16].IsDisabled" v-on:change="displayTooltip()" id="197604f6-fba9-4cf4-9272-23671933d033" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[16].IsChecked" value="true">
+                                    &#x6CC9;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[16].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/izumi-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6CC9;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('17')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="24332fcd-77bb-4206-b759-3a46a2910f37" name="SelectFacilities.Facilities[16].SelectedFacility.Value" value="17">
+                            <input type="hidden" id="7b117934-0f4a-4e84-9e9b-d0490d66e0b4" name="SelectFacilities.Facilities[16].SelectedFacility.Text" value="&#x6CC9;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(17)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[17].IsChecked" :disabled="model.SelectFacilities.Facilities[17].IsDisabled" v-on:change="displayTooltip()" id="de4cecd8-a107-40b9-9398-79205e937638" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[17].IsChecked" value="true">
+                                    &#x702C;&#x8C37;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</b-form-checkbox><input name="SelectFacilities.Facilities[17].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/seya-sc-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x702C;&#x8C37;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('18')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="daced8ca-070b-441b-a9bc-7195be330673" name="SelectFacilities.Facilities[17].SelectedFacility.Value" value="18">
+                            <input type="hidden" id="85c9fbcf-9862-4a99-b17c-d26953417ef8" name="SelectFacilities.Facilities[17].SelectedFacility.Text" value="&#x702C;&#x8C37;&#x30B9;&#x30DD;&#x30FC;&#x30C4;&#x30BB;&#x30F3;&#x30BF;&#x30FC;">
+                            <tr v-show = "showMore(18)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[18].IsChecked" :disabled="model.SelectFacilities.Facilities[18].IsDisabled" v-on:change="displayTooltip()" id="82e50f34-934e-4695-94df-d88ed6d7ce28" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[18].IsChecked" value="true">
+                                    &#x5E73;&#x6CBC;&#x8A18;&#x5FF5;&#x4F53;&#x80B2;&#x9928;</b-form-checkbox><input name="SelectFacilities.Facilities[18].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/hiratai-ysa/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x5E73;&#x6CBC;&#x8A18;&#x5FF5;&#x4F53;&#x80B2;&#x9928;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('19')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="fa52bf20-0891-42af-950a-3ed53e99a6c4" name="SelectFacilities.Facilities[18].SelectedFacility.Value" value="19">
+                            <input type="hidden" id="d61bfce5-9505-4046-abbd-1fdbc46cc79b" name="SelectFacilities.Facilities[18].SelectedFacility.Text" value="&#x5E73;&#x6CBC;&#x8A18;&#x5FF5;&#x4F53;&#x80B2;&#x9928;">
+                            <tr v-show = "showMore(19)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[19].IsChecked" :disabled="model.SelectFacilities.Facilities[19].IsDisabled" v-on:change="displayTooltip()" id="b68ca1ef-9966-4d85-8f8e-5b83a0e0f5b8" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[19].IsChecked" value="true">
+                                    &#x6A2A;&#x6D5C;&#x56FD;&#x969B;&#x30D7;&#x30FC;&#x30EB;</b-form-checkbox><input name="SelectFacilities.Facilities[19].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://yokohama-sport.jp/waterarena/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6A2A;&#x6D5C;&#x56FD;&#x969B;&#x30D7;&#x30FC;&#x30EB;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('20')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="28e7dbb2-c582-4ed7-a44a-d19725a14bc0" name="SelectFacilities.Facilities[19].SelectedFacility.Value" value="20">
+                            <input type="hidden" id="052962ef-ca72-48e8-bfb5-03fda02b6c26" name="SelectFacilities.Facilities[19].SelectedFacility.Text" value="&#x6A2A;&#x6D5C;&#x56FD;&#x969B;&#x30D7;&#x30FC;&#x30EB;">
+                            <tr v-show = "showMore(20)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[20].IsChecked" :disabled="model.SelectFacilities.Facilities[20].IsDisabled" v-on:change="displayTooltip()" id="59c01902-ee6f-4f87-b413-3624ca30e29f" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[20].IsChecked" value="true">
+                                    &#x305F;&#x304D;&#x304C;&#x3057;&#x3089;&#x4F1A;&#x9928;</b-form-checkbox><input name="SelectFacilities.Facilities[20].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://www.takigashira.jp/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x305F;&#x304D;&#x304C;&#x3057;&#x3089;&#x4F1A;&#x9928;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('21')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="7181d58f-2a45-4621-9c61-129f579157a5" name="SelectFacilities.Facilities[20].SelectedFacility.Value" value="21">
+                            <input type="hidden" id="0a37bbe9-75e7-4c59-91bc-bb5eb368fe6b" name="SelectFacilities.Facilities[20].SelectedFacility.Text" value="&#x305F;&#x304D;&#x304C;&#x3057;&#x3089;&#x4F1A;&#x9928;">
+                            <tr v-show = "showMore(21)">
+                                <td class="p-1">
+                                    <b-form-checkbox v-model="model.SelectFacilities.Facilities[21].IsChecked" :disabled="model.SelectFacilities.Facilities[21].IsDisabled" v-on:change="displayTooltip()" id="d529745d-3324-437a-b6e5-b3ddd8848a6a" class="hight-auto my-1 border-checkbox expand" type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="SelectFacilities.Facilities[21].IsChecked" value="true">
+                                    &#x6E05;&#x6C34;&#x30B1;&#x4E18;&#x516C;&#x5712;&#x4F53;&#x80B2;&#x9928;</b-form-checkbox><input name="SelectFacilities.Facilities[21].IsChecked" type="hidden" value="false">
+                                </td>
+                                <td class="text-center bell">
+                                </td>
+                                <td class="text-center facility-link">
+                                        <button class="btn-tertiary btn-icon" v-on:click.prevent="openFacilityGuidUrl('https://www.kanagawaparks.com/shimizugaoka/')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#external-link-alt"></use></svg>
+                                            <span class="sr-only">案内</span>
+                                        </button>
+                                </td>
+                                <td class="text-center map">
+                                        <button class="btn-indigo btn-icon" v-on:click.prevent="openMapUrl('https://www.google.com/maps/search/?api=1&amp;query=&#x6E05;&#x6C34;&#x30B1;&#x4E18;&#x516C;&#x5712;&#x4F53;&#x80B2;&#x9928;')">
+                                            <svg aria-hidden="true" class="icon"><use xlink:href="dist/images/icons.svg#map-marker-alt"></use></svg>
+                                            <span class="sr-only">地図</span>
+                                        </button>
+                                </td>
+                                
+                                <td class="text-center detail">
+                                        <button class="btn-gray btn-icon" v-on:click.prevent="openDetail('36')">
+                                            <svg aria-hidden="true" class="icon-secondary"><use xlink:href="dist/images/icons.svg#ellipsis-h"></use></svg>
+                                            <span class="sr-only">詳細</span>
+                                        </button>
+                                </td>
+                            </tr>
+                            <input type="hidden" id="7b7c2b27-6a00-4ed0-a4c3-1299e7280649" name="SelectFacilities.Facilities[21].SelectedFacility.Value" value="36">
+                            <input type="hidden" id="d2bb0797-d770-42f7-bfbd-7abbb66e5bc0" name="SelectFacilities.Facilities[21].SelectedFacility.Text" value="&#x6E05;&#x6C34;&#x30B1;&#x4E18;&#x516C;&#x5712;&#x4F53;&#x80B2;&#x9928;">
+                        </tbody>
+                </table>
+                <div class="mt-3 text-center" v-show="showMoreFacilityBtn">
+                    <button type="button" class="btn btn-quaternary" @click="displayMoreFacility"><svg class="mr-1"><use xlink:href="dist/images/icons.svg#chevron-down"></use></svg>さらに読み込む</button>
+                </div>
+        </div>
+    </div>
+</div>
+<dialog-new-from-facility
+    ref="dialogNewFromFacility"
+    inline-template>
+    <b-modal v-model="dialogVisibleMessage" size="lg">
+        <template v-slot:modal-title>
+
+            <span class="sr-only">お知らせを表示する画面です。</span>
+            <span><svg class="icon icon-yellow mr-2"><use xlink:href="dist/images/icons.svg#bell"></use></svg>{{displayFacilityName}}からのお知らせ</span>
+
+        </template>
+        <div v-if="hasData">
+            <ul>
+                <li class="m-3" v-for="model in dialogNewsFromFacilityModel">
+                    <h3 class="message-item-title">{{model.Subject}}</h3>
+                    <span class="pre-line" v-html="model.Body"></span>
+                    <div class="text-right time"><svg class="icon mr-1"><use xlink:href="dist/images/icons.svg#clock"></use></svg>{{formatDate(model.NewsFrom)}}</div>
+                </li>
+            </ul>
+        </div>
+        <div v-else>
+            
+
+<div class="page-body p-3">
+    <div class="card">
+        <div class="card-body message-no-data">
+            <h4 class="d-flex items-align-baseline">
+                <svg class="icon-blue mr-2"><use xlink:href="dist/images/icons.svg#info-circle"></use></svg>
+                <span>
+                    通知がありません。
+                </span>
+            </h4>
+            <hr>
+            <div class="m-3 pre-line">
+                
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <template v-slot:modal-footer>
+            <span class="dialog-footer">
+                <button type="button" class="btn btn-lg btn-gray" @click="dialogVisibleMessage=!dialogVisibleMessage">閉じる</button>
+            </span>
+        </template>
+    </b-modal>
+</dialog-new-from-facility>
+<dialog-todays-reservation ref="dialogTodaysReservation" inline-template>
+    <b-modal v-model="dialogVisibleToday" size="lg">
+        <template v-slot:modal-title>
+            <span class="sr-only">室場ごとの本日の予定です。時間帯、利用者、予定の確認です。</span>
+            <span>
+                <svg class="icon icon-pink mr-2">
+                    <use xlink:href="dist/images/icons.svg#calendar-alt-regular"></use>
+                </svg>{{todaysReservationModel.FacilityName}}<span>の本日の予定</span>
+            </span>
+        </template>
+        <div v-if="todaysReservationModel">
+            <div class="p-2" v-for="place in todaysReservationModel.PlaceList">
+                <div class="d-flex">
+                    <h1 class="h5">
+                        <span>{{place.PlaceName}}</span>
+                        <span v-show="place.Quantity > 1">{{place.Quantity}} 面</span>
+                    </h1>
+                    <div class="card ml-auto capacity mb-1">
+                        <div class="card-body px-2 py-1">
+                            <span class="mr-2"><svg class="icon mr-1">
+                                    <use xlink:href="dist/images/icons.svg#users"></use>
+                                </svg>定員</span>
+                            <span v-if="place.Capacity > 0">{{place.Capacity}}</span>
+                            <span v-else>なし</span>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-thick">
+                    <thead>
+                        <tr>
+                            <th class="w-10r">時間帯</th>
+                            <th>利用者</th>
+                            <th class="w-15r">予定</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="reservation in place.ReservationList">
+                        <tr>
+                            <td>{{reservation.TimeFromTo}}</td>
+                            <td>{{reservation.UserName}}</td>
+                            <td>{{reservation.PurposeName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <template v-slot:modal-footer>
+            <span class="dialog-footer">
+                <button type="button" class="btn btn-lg btn-gray"
+                    @click="dialogVisibleToday=!dialogVisibleToday">閉じる</button>
+            </span>
+        </template>
+    </b-modal>
+</dialog-todays-reservation>
+<dialog-barrier-free-equipment
+    ref="dialogBarrierFreeEquipment"
+    inline-template>
+    <b-modal v-model="dialogBarrierVisible" size="lg">
+        <span class="sr-only">室場ごとのバリアフリー設備の確認です。</span>
+        <template v-slot:modal-title v-if="barrierFreeEquipment">
+            <span>
+                <svg class="icon icon-secondary mr-2" aria-hidden="true"><use xlink:href="dist/images/icons.svg#wheelchair"></use></svg>
+                {{ barrierFreeEquipment.FacilityName }} <span >バリアフリー設備</span>
+            </span>
+        </template>
+        <div class="barrier-equip" v-if="barrierFreeEquipment">
+            <div class="mt-2 py-2" v-for="place in barrierFreeEquipment.PlaceList">
+                <h1 class="h5">{{ place.PlaceName }}</h1>
+                <div>
+                    <span class="badge badge-secondary py-1 mr-2 mt-2" v-for="barrier in place.BarrierFreeEquipmentList">
+                        <svg class="icon mr-2" aria-hidden="true">
+                            <title aria-hidden="true"> {{ barrier.Name }} </title>
+                            <desc  aria-hidden="true" >{{ barrier.ImageDescription }}</desc>
+                            <use  :xlink:href= "barrier.ImagePath"></use>
+                        </svg><span>{{ barrier.Name }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <template v-slot:modal-footer>
+            <span class="dialog-footer">
+                <button type="button" class="btn btn-lg btn-gray" @click.prevent="dialogBarrierVisible=!dialogBarrierVisible">閉じる</button>
+            </span>
+        </template>
+    </b-modal>
+</dialog-barrier-free-equipment>
+<dialog-detail ref="dialogDetail" inline-template>
+    <b-modal v-model="dialogVisibleDetail" size="lg">
+        <template v-slot:modal-title>
+            <span>
+                <svg class="icon icon-secondary mr-2">
+                    <use xlink:href="dist/images/icons.svg#ellipsis-h"></use>
+                </svg>{{dialogDetailModel.FacilityName}}
+            </span>
+        </template>
+        <div v-if="dialogDetailModel">
+            <div class="detial-dialog">
+                <div v-show="dialogDetailModel.FacilityGuidUrl.trim().length">
+                    <button class="btn btn-lg btn-green"
+                        v-on:click.prevent="openFacilityGuidUrl(dialogDetailModel.FacilityGuidUrl)"><svg
+                            class="icon mr-2">
+                            <use xlink:href="dist/images/icons.svg#external-link-alt"></use>
+                        </svg>案内</button>
+                </div>
+                <div class="mt-2" v-show="dialogDetailModel.MapUrl.trim().length">
+                    <button class="btn btn-lg btn-indigo"
+                        v-on:click.prevent="openFacilityGuidUrl(dialogDetailModel.MapUrl)"><svg class="icon mr-2">
+                            <use xlink:href="dist/images/icons.svg#map-marker-alt"></use>
+                        </svg>地図</button>
+                </div>
+                
+                <div v-if="dialogDetailModel.BarrierFreeEquipmentList">
+                    <div class="barrier-equip" v-show="dialogDetailModel.BarrierFreeEquipmentList.length > 0">
+
+                        <h3 class="text-primary dialog-item-title"><svg class="icon mr-2">
+                                <use xlink:href="dist/images/icons.svg#wheelchair"></use>
+                            </svg>バリアフリー設備</h3>
+                        <span class="sr-only">室場ごとのバリアフリー設備の確認です。</span>
+
+                        <div class="item">
+                            <div class="py-2" v-for="barrierFree in dialogDetailModel.BarrierFreeEquipmentList">
+                                <h1 class="h5">{{barrierFree.PlaceName}}</h1>
+                                <div>
+                                    <span class="badge badge-secondary py-1 mr-2 mt-2"
+                                        v-for="barrierFreeItem in barrierFree.BarrierFreeEquipmentList"><svg
+                                            class="icon mr-2">
+                                            <use :xlink:href="'dist/images/icons.svg#'+ barrierFreeItem.ImageName">
+                                            </use>
+                                        </svg>{{barrierFreeItem.Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template v-slot:modal-footer>
+            <span class="dialog-footer">
+                <button type="button" class="btn btn-lg btn-gray"
+                    @click="dialogVisibleDetail=!dialogVisibleDetail">閉じる</button>
+            </span>
+        </template>
+    </b-modal>
+</dialog-detail>
+<generic-message-box ref="messageBox" inline-template>
+    <div></div>
+</generic-message-box>
+
+
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Obpbi4W6NJGkcUIjsj332rbkBJR891Cfg0lMBD3SNHH_3vUWGohgaoCGRCP3JI8gC1Ie2uighgTF3RUg-kVmuyi__M8PgzjRDTWUUn1KH8xsBSR0v16MyyH3t_yD3j69LkT65490HfnV_yfLTNRVSc" />
+</form>
+</div>
+<div class="fixed-bottom">
+    <ul class="buttons">
+            <li class="item next">
+                <button aria-label='次へ進む' type="button" id="test" class="btn btn-lg btn-primary toolwrapper" @click="next">
+                     <div class="tooltip" v-if="showTooltip">施設を選んだら、次へ進みましょう</div>
+                    <svg class="icon mr-2"><use xlink:href="dist/images/icons.svg#chevron-right"></use></svg><span aria-hidden="true">次へ進む</span>
+                </button>
+     
+            </li>
+        <li class="item prev">
+            <button aria-label='前に戻る' class="btn btn-lg btn-quaternary " @click="backToPrevious"><svg class="icon mr-2"><use xlink:href="dist/images/icons.svg#chevron-left"></use></svg><span aria-hidden="true">前に戻る</span></button>
+        </li>
+        <li class="item mr-auto">
+            <button aria-label='Homeに戻る' class="btn btn-lg btn-quaternary" @click="backToHome"><svg class="icon mr-2"><use xlink:href="dist/images/icons.svg#home"></use></svg><span aria-hidden="true">Homeに戻る</span></button>
+        </li>
+        <li class="item go-top">
+            <button class="btn btn-lg btn-quaternary" aria-label='一番上へ' @click="scrollToTop"><svg class="icon mr-2"><use xlink:href="dist/images/icons.svg#angle-double-up"></use></svg><span aria-hidden="true">一番上へ</span></button>
+        </li>
+    </ul>
+</div>
+<b-modal>
+    <template v-slot:modal-footer>
+            <span class="dialog-footer">
+                <button type="button" class="btn btn-lg btn-gray" @click="dialogVisibleDetail=!dialogVisibleDetail">閉じる</button>
+            </span>
+    </template>
+</b-modal>
+
+            <generic-message-box ref="messageBox" inline-template>
+    <div></div>
+</generic-message-box>
+
+    </div>
+        <!-- <script src="~/dist/vendor.js" asp-append-version="true"></script> -->
+
+        
+        
+        <script src="/user/dist/vue.min.a75012o4bz.js"></script>
+        
+
+        <script src="/user/dist/axios.djmtotfti9.js"></script>
+
+        <!-- BootstrapVue -->
+        <script src="/user/dist/bootstrap-vue.rzr92ys86s.js"></script>
+        <script src="/user/dist/generic_message_box.lf0o1e5fw8.js"></script>
+
+        <!-- vue-dotnet-validator -->
+        <script src="/user/dist/index.6mirtqb4j4.js"></script>
+        <script src="/user/dist/oec-partial-component.mfhwoz7xks.js"></script>
+        <script src="/user/dist/oec-hidden.4dbymsvgrb.js"></script>
+
+        <!-- ヘッダ -->
+        <script src="/user/dist/header_partial.98dupa7097.js"></script>
+
+        <!-- Resources -->
+        <script src="/user/Translator"></script>
+
+        <script>
+            function locationRedirect(nextPage) {
+                document.body.classList.add("loading-indicator-navigation");
+                location.href = nextPage;
+            }
+            function displayLoading() {
+                document.body.classList.add("loading-indicator");
+            }
+            //イベントハンドラがマウスのみに依存しない対策
+            function isWhetherToPressTheSpaceEnterbar() {
+                return event.keyCode === 32 || event.keyCode == 13; 
+            }
+        </script>
+
+        
+    <script src="/user/dist/dialog_new_from_facility.0s7vix0ulw.js"></script>
+    <script src="/user/dist/dialog_todays_reservation.43ncpwpvg9.js"></script>
+    <script src="/user/dist/header_partial.98dupa7097.js"></script>
+    <script src="/user/dist/dialog_barrier_free_equipment.1yl0iv6wfj.js"></script>
+    <script src="/user/dist/dialog_detail.9acsw70v0f.js"></script>
+    <script src="/user/dist/generic_message_box.lf0o1e5fw8.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    dialogVisible: false,
+                    showMoreFacilityBtnClickCnt:0,
+                    model: JSON.parse("{\u0022MessageNoData\u0022:{\u0022Header\u0022:{\u0022Item1\u0022:\u0022203-MessageNoDataHeader\u0022,\u0022Item2\u0022:[]},\u0022Body\u0022:{\u0022Item1\u0022:\u0022203-MessageNoDataBody\u0022,\u0022Item2\u0022:[]}},\u0022SelectFacilities\u0022:{\u0022Facilities\u0022:[{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u9DB4\u898B\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00221\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/tsurumi-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u9DB4\u898B\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u9DB4\u898B\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u9DB4\u898B\u533A\u5143\u5BAE\uFF12\uFF0D\uFF15\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u795E\u5948\u5DDD\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00222\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://kanagawa-sc.com/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u795E\u5948\u5DDD\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u795E\u5948\u5DDD\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u795E\u5948\u5DDD\u533A\u4E09\u30C4\u6CA2\u4E0A\u753A\uFF11\uFF11\uFF0D\uFF11\uFF18\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u897F\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00223\u0022},\u0022ObjectCodeList\u0022:[1,2],\u0022HasNewsFromFacility\u0022:true,\u0022FacilityGuidUrl\u0022:\u0022https://www.sportsoasis.co.jp/sh47/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6A2A\u6D5C\u5E02\u897F\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6A2A\u6D5C\u5E02\u897F\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u897F\u533A\u6D45\u9593\u753A\uFF14\uFF0D\uFF13\uFF14\uFF10\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u4E2D\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00224\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/naka-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6A2A\u6D5C\u5E02\u4E2D\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6A2A\u6D5C\u5E02\u4E2D\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u4E2D\u533A\u65B0\u5C71\u4E0B\uFF13\uFF0D\uFF11\uFF15\uFF0D\uFF14\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u5357\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00225\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://www.yokohama-minamisc.jp/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u5357\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u5357\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u5357\u533A\u5927\u5CA1\uFF11\uFF0D\uFF11\uFF14\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6E2F\u5357\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00226\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/konan-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6E2F\u5357\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6E2F\u5357\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u6E2F\u5357\u533A\u65E5\u91CE\uFF11\uFF0D\uFF12\uFF0D\uFF13\uFF10\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u4FDD\u571F\u30B1\u8C37\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00227\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://hodogaya-sports.com/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u4FDD\u571F\u30B1\u8C37\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u4FDD\u571F\u30B1\u8C37\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u4FDD\u571F\u30B1\u8C37\u533A\u795E\u6238\u753A\uFF11\uFF12\uFF19\uFF0D\uFF12\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u65ED\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00228\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/asahi-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6A2A\u6D5C\u5E02\u65ED \u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6A2A\u6D5C\u5E02\u65ED \u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u65ED\u533A\u5DDD\u5CF6\u753A\uFF11\uFF19\uFF18\uFF13\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u78EF\u5B50\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u00229\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/isogo-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u78EF\u5B50\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u78EF\u5B50\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u78EF\u5B50\u533A\u6749\u7530\uFF15\uFF0D\uFF13\uFF12\uFF0D\uFF12\uFF15\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u91D1\u6CA2\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002210\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/kanazawa-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u91D1\u6CA2\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u91D1\u6CA2\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u91D1\u6CA2\u533A\u9577\u6D5C\uFF11\uFF10\uFF16\uFF0D\uFF18\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6E2F\u5317\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002211\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://kohoku-sports.com/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6E2F\u5317\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6E2F\u5317\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u6E2F\u5317\u533A\u5927\u8C46\u6238\u753A\uFF15\uFF11\uFF18\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u7DD1\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002212\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/midori-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6A2A\u6D5C\u5E02\u7DD1\u533A\u4E2D\u5C71\uFF11\uFF0D\uFF12\uFF19\uFF0D\uFF17\u3000\u7DD1\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6A2A\u6D5C\u5E02\u7DD1\u533A\u4E2D\u5C71\uFF11\uFF0D\uFF12\uFF19\uFF0D\uFF17\u3000\u7DD1\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u7DD1\u533A\u4E2D\u5C71\uFF11\uFF0D\uFF12\uFF19\uFF0D\uFF17\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u9752\u8449\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002213\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://information.konamisportsclub.jp/trust/aoba/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u9752\u8449\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u9752\u8449\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u9752\u8449\u533A\u5E02\u30F6\u5C3E\u753A\uFF13\uFF11\uFF0D\uFF14\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u90FD\u7B51\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002214\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/tsuzuki-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u90FD\u7B51\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u90FD\u7B51\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u90FD\u7B51\u533A\u6C60\u8FBA\u753A\uFF12\uFF19\uFF17\uFF13\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6238\u585A\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002215\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/totsuka-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6A2A\u6D5C\u5E02\u6238\u585A\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6A2A\u6D5C\u5E02\u6238\u585A\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u6238\u585A\u533A\u4E0A\u5009\u7530\u753A\uFF14\uFF17\uFF17\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6804\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002216\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:true,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/sakae-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6804\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6804\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u6804\u533A\u6842\u753A\uFF12\uFF17\uFF19\uFF0D\uFF12\uFF19\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6CC9\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002217\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/izumi-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6CC9\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6CC9\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u6CC9\u533A\u897F\u304C\u5CA1\uFF13\uFF0D\uFF11\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u702C\u8C37\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Value\u0022:\u002218\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6,7,8],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/seya-sc-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u702C\u8C37\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u702C\u8C37\u30B9\u30DD\u30FC\u30C4\u30BB\u30F3\u30BF\u30FC\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u702C\u8C37\u533A\u5357\u53F0\uFF12\uFF0D\uFF14\uFF0D\uFF16\uFF15\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u5E73\u6CBC\u8A18\u5FF5\u4F53\u80B2\u9928\u0022,\u0022Value\u0022:\u002219\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/hiratai-ysa/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u5E73\u6CBC\u8A18\u5FF5\u4F53\u80B2\u9928\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u5E73\u6CBC\u8A18\u5FF5\u4F53\u80B2\u9928\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u795E\u5948\u5DDD\u533A\u4E09\u30C4\u6CA2\u897F\u753A\uFF13\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6A2A\u6D5C\u56FD\u969B\u30D7\u30FC\u30EB\u0022,\u0022Value\u0022:\u002220\u0022},\u0022ObjectCodeList\u0022:[22,33],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://yokohama-sport.jp/waterarena/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6A2A\u6D5C\u56FD\u969B\u30D7\u30FC\u30EB\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6A2A\u6D5C\u56FD\u969B\u30D7\u30FC\u30EB\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u90FD\u7B51\u533A\u5317\u5C71\u7530\uFF17\uFF0D\uFF13\uFF0D\uFF11\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u305F\u304D\u304C\u3057\u3089\u4F1A\u9928\u0022,\u0022Value\u0022:\u002221\u0022},\u0022ObjectCodeList\u0022:[1,2,3,4,5,6],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://www.takigashira.jp/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u305F\u304D\u304C\u3057\u3089\u4F1A\u9928\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u305F\u304D\u304C\u3057\u3089\u4F1A\u9928\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u78EF\u5B50\u533A\u6EDD\u982D\uFF13\uFF0D\uFF11\uFF0D\uFF16\uFF18\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false},{\u0022SelectedFacility\u0022:{\u0022Disabled\u0022:false,\u0022Group\u0022:null,\u0022Selected\u0022:false,\u0022Text\u0022:\u0022\u6E05\u6C34\u30B1\u4E18\u516C\u5712\u4F53\u80B2\u9928\u0022,\u0022Value\u0022:\u002236\u0022},\u0022ObjectCodeList\u0022:[1,2],\u0022HasNewsFromFacility\u0022:false,\u0022FacilityGuidUrl\u0022:\u0022https://www.kanagawaparks.com/shimizugaoka/\u0022,\u0022MapUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u6E05\u6C34\u30B1\u4E18\u516C\u5712\u4F53\u80B2\u9928\u0022,\u0022MapApiUrl\u0022:\u0022https://www.google.com/maps/search/?api=1\u0026query=\u0022,\u0022MapSearchKeyword\u0022:\u0022\u6E05\u6C34\u30B1\u4E18\u516C\u5712\u4F53\u80B2\u9928\u0022,\u0022Latitude\u0022:0.000000,\u0022Longitude\u0022:0.000000,\u0022Address\u0022:\u0022\u6A2A\u6D5C\u5E02\u5357\u533A\u6E05\u6C34\u30B1\u4E18\uFF18\uFF17\uFF0D\uFF12\u0022,\u0022IsDisabled\u0022:false,\u0022HasTodayReserve\u0022:false,\u0022HasBarrierFree\u0022:false,\u0022IsChecked\u0022:false}]},\u0022IsDisplayDescriptionApply\u0022:true}"),
+                    showTooltip: false,
+                }
+            },
+            computed:{
+                showMoreFacilityBtn(){
+                    if(((this.showMoreFacilityBtnClickCnt + 1) * 10) >= this.model.SelectFacilities.Facilities.length){
+                        return false;
+                    }
+
+                    return true;
+                }
+            },
+            methods: {
+                init: function() { },
+                displayTooltip: function() {
+                    this.showTooltip = true;
+                },
+                showMore(index){
+                    let dispArr = this.model.SelectFacilities.Facilities;
+                    let filterindex = ((this.showMoreFacilityBtnClickCnt + 1) * 10);
+                    return index < filterindex;
+                },
+                displayMoreFacility(){
+                    this.showMoreFacilityBtnClickCnt++;
+                },
+                openMessage: async function(facilityCode, facilityName) {
+                    let form = document.forms.namedItem("myform");
+                    let data = new FormData(form);
+                    data.append('facilityCode', facilityCode);
+                    try {
+                            let response = await axios.post("AvailabilityCheckApplySelectFacility/OpenDialogNewsFromFacility", data).catch(function (error)
+                            {
+                                locationRedirect("./Error");
+                            });
+                            this.$refs['dialogNewFromFacility'].openDialog(response.data, facilityName);
+                        }
+                    catch (e) {}
+                },
+                openFacilityGuidUrl:function(url){
+                    window.open(url, "_blank","noopener");
+                },
+                openMapUrl:function(url){
+                    window.open(url, "_blank","noopener");
+                },
+                openBarrier:async function(facilityCode) {
+                    let selectedFacility = this.model.SelectFacilities.Facilities.find(facility => facility.SelectedFacility.Value === facilityCode);
+                    let form = document.forms.namedItem("myform");
+                    let data = new FormData(form);
+                    data.append('facilityCode', facilityCode);
+                    selectedFacility.ObjectCodeList.forEach((obj, index) => {
+						data.append("objectCodeList[" + index + "]", obj);
+					});
+                    try {
+                            let response = await axios.post("AvailabilityCheckApplySelectFacility/OpenDialogBarrierFreeEquipment", data).catch(function (error)
+                            {
+                                locationRedirect("./Error");
+                            });
+                            this.$refs['dialogBarrierFreeEquipment'].openDialog(response.data);
+                        }
+                    catch (e) {}
+                },
+                openDetail:async function(facilityCode) {
+                    let selectedFacility = this.model.SelectFacilities.Facilities.find(facility => facility.SelectedFacility.Value === facilityCode);
+                    let form = document.forms.namedItem("myform");
+                    let data = new FormData(form);
+                    data.append('facilityCode', facilityCode);
+                    selectedFacility.ObjectCodeList.forEach((obj, index) => {
+						data.append("objectCodeList[" + index + "]", obj);
+					});
+                    try {
+                            let response = await axios.post("AvailabilityCheckApplySelectFacility/OpenDialogDetail", data).catch(function (error)
+                            {
+                                locationRedirect("./Error");
+                            });
+                            this.$refs['dialogDetail'].openDialog(response.data);
+                        }
+                    catch (e) {}
+                },
+                openToday:async function(facilityCode) {
+                    let form = document.forms.namedItem("myform");
+                    let data = new FormData(form);
+                    data.append('facilityCode', facilityCode);
+                    try {
+                            let response = await axios.post("AvailabilityCheckApplySelectFacility/OpenDialogTodaysReservation", data).catch(function (error)
+                            {
+                                locationRedirect("./Error");
+                            });
+                            this.$refs['dialogTodaysReservation'].openDialog(response.data);
+                        }
+                    catch (e) {}
+                },
+                backToHome: async function() {
+					let form = document.forms.namedItem("myform");
+                    let data = new FormData(form);
+                    try {
+                            let response = await axios.post("AvailabilityCheckApplySelectFacility/Home", data).catch(function (error)
+                            {
+                                locationRedirect("./Error");
+                            });
+                            let result = response.data;
+                            if (result.Result === "Ok"){
+                            locationRedirect(result.Information);
+                            }
+                    } catch (e) {}
+				},
+                backToPrevious: async function() {
+                    let form = document.forms.namedItem("myform");
+                    let data = new FormData(form);
+                    try {
+                            let response = await axios.post("AvailabilityCheckApplySelectFacility/Previous", data).catch(function (error)
+                            {
+                                locationRedirect("./Error");
+                            });
+                            let result = response.data;
+                            if (result.Result === "Ok"){
+                                locationRedirect(result.Information);
+                            }
+                    } catch (e) {}
+				},
+                next: async function() {
+                    try {
+                        let form = document.forms.namedItem("myform");
+                        let data = new FormData(form);
+                        data.append('token', this.token == undefined ? null : this.token);
+                        let response = await axios.post("AvailabilityCheckApplySelectFacility/Next", data).catch(function (error)
+                        {
+                            locationRedirect("./Error");
+                        });
+                        let result = response.data;
+                        if(response.data.Result === "InvalidRecaptcha"){
+                            locationRedirect(result.Information);
+                        }else if (result.Result === "Ok"){
+                            locationRedirect(result.Information);
+                        }else{
+                            this.$refs['messageBox'].showMessageBoxError(result.Information);
+                        }
+                    }
+                    catch (e) {
+                        locationRedirect("./Error");
+                    }
+				},
+                scrollToTop(){
+                    const duration = 200;
+                    const interval = 20;
+                    const step = -window.scrollY / Math.ceil(duration / interval);
+                    const timer = setInterval(() => {
+                        window.scrollBy(0, step);
+                        if(window.scrollY <= 0) {
+                            clearInterval(timer);
+                        }
+                    }, interval);
+                },
+                openLanguageDialogSubmit: function(){},
+                submit: function(){},
+                submitSuccess: function(){},
+                submitError: function(){},
+            },
+            mounted: function () {
+                this.init();
+                if(this.model.SelectFacilities.Facilities.some(x=> x.IsChecked)){
+                    this.showTooltip = true;
+                }
+            },
+            provide: function(){
+                return {
+                    openLanguageDialogSubmit: this.openLanguageDialogSubmit,
+                    submit: this.submit,
+                    submitSuccess: this.submitSuccess,
+                    submitError: this.submitError,
+                }
+            },
+        })
+    </script>
+
+</body>
+</html>

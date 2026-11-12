@@ -1,0 +1,33 @@
+# Impostazioni del bot. Modifica, fai commit, e dal run successivo valgono.
+
+# Sport cercato sul portale: 5 = バレーボール ６人制, 6 = バレーボール ９人制
+purpose: 5
+
+# Palestre da controllare, scritte esattamente come sul sito.
+# Altre possibili: 神奈川スポーツセンター, 南スポーツセンター, 旭スポーツセンター,
+# 緑スポーツセンター, 戸塚スポーツセンター
+gyms:
+  - 港北スポーツセンター
+
+# Quali slot liberi ti interessano. Uno slot viene segnalato se rispetta
+# ALMENO UNA regola. Una regola vuota "{}" = tutti gli slot.
+# Campi possibili in una regola (tutti facoltativi):
+#   rooms: [第一体育室（全面）]      sale ammesse (vuoto = tutte)
+#   time_from: "13:00"            lo slot deve iniziare a quest'ora o dopo
+#   time_to: "21:00"              lo slot deve finire a quest'ora o prima
+#   min_duration_minutes: 120     durata minima dello slot
+#   weekdays: [Sat, Sun]          giorni ammessi: Mon Tue Wed Thu Fri Sat Sun
+rules:
+  - {}
+  # Esempio: solo sabato e domenica dal pomeriggio
+  # - weekdays: [Sat, Sun]
+  #   time_from: "13:00"
+
+# Avvisare anche quando uno slot sparisce (qualcuno l'ha prenotato)?
+notify_gone: false
+
+# Mandare un messaggio anche quando non è cambiato niente? (sconsigliato: ogni 10 minuti)
+notify_no_change: false
+
+# Se il bot si rompe, avvisa al massimo una volta ogni N ore.
+error_alert_every_hours: 6

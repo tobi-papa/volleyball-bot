@@ -1,7 +1,6 @@
-.env
-dispos.json
-dispos_interessantes_actuelles.json
-dispos_interessantes_passes.json
+state.json
 debug/
-erreur.png
 __pycache__/
+.venv/
+.superpowers/
+.pytest_cache/
