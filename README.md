@@ -1,37 +1,37 @@
 # volleyball-bot
 
-Ogni 10 minuti (7:00–23:50 ora giapponese) controlla i campi liberi sul
-[portale prenotazioni di Yokohama](https://www.shisetsu.city.yokohama.lg.jp/user/Home)
-e manda un messaggio su Telegram **solo quando compare uno slot nuovo**.
+Every 10 minutes (7:00–23:50 Japan time) this bot checks free courts on the
+[Yokohama facility booking portal](https://www.shisetsu.city.yokohama.lg.jp/user/Home)
+and sends a Telegram message **only when a new slot appears**.
 
-- Gira su GitHub Actions: il tuo computer può restare spento.
-- Niente login sul portale e niente browser: legge le disponibilità come un
-  visitatore, con normali richieste HTTP (un giro dura circa 20 secondi).
-- Cosa controllare (palestre, orari, giorni) si decide in `config.yaml`.
+- Runs on GitHub Actions: your computer can stay off.
+- No login on the portal and no browser: it reads availability like a visitor,
+  with plain HTTP requests (one run takes about 20 seconds).
+- What to watch (gyms, times, weekdays) is set in `config.yaml`.
 
-Basato su [jeremynata/volleyball-bot](https://github.com/jeremynata/volleyball-bot).
-Come funziona il portale e le scelte di progetto sono in [docs/design.md](docs/design.md).
+Based on [jeremynata/volleyball-bot](https://github.com/jeremynata/volleyball-bot).
+How the portal works and the design decisions are in [docs/design.md](docs/design.md) (Italian).
 
-## Messa in funzione
+## Setup
 
-1. **Crea il bot Telegram.** Su Telegram scrivi a @BotFather, manda `/newbot`
-   e segui le istruzioni. Alla fine ti dà un **token** (tipo `123456:ABC...`).
-2. **Trova il tuo chat_id.** Scrivi un messaggio qualsiasi al tuo nuovo bot,
-   poi apri nel browser `https://api.telegram.org/bot<TOKEN>/getUpdates`
-   (con il tuo token al posto di `<TOKEN>`). Il numero in
-   `"chat":{"id": ...}` è il tuo **chat_id**.
-3. **Aggiungi i segreti su GitHub.** Nel repo: Settings → Secrets and variables
-   → Actions → New repository secret. Crea:
-   - `TELEGRAM_BOT_TOKEN` = il token
-   - `TELEGRAM_CHAT_ID` = il chat_id
-4. **Accendi.** Tab Actions → abilita i workflow se richiesto → "Scan volley"
-   → Run workflow. Al primo giro arriva un messaggio con gli slot liberi di
-   adesso; da lì in poi solo le novità.
+1. **Create the Telegram bot.** In Telegram, message @BotFather, send `/newbot`
+   and follow the steps. At the end you get a **token** (like `123456:ABC...`).
+2. **Find your chat_id.** Send any message to your new bot, then open
+   `https://api.telegram.org/bot<TOKEN>/getUpdates` in a browser (with your
+   token instead of `<TOKEN>`). The number in `"chat":{"id": ...}` is your
+   **chat_id**.
+3. **Add the secrets on GitHub.** In the repo: Settings → Secrets and variables
+   → Actions → New repository secret. Create:
+   - `TELEGRAM_BOT_TOKEN` = the token
+   - `TELEGRAM_CHAT_ID` = the chat_id
+4. **Turn it on.** Actions tab → enable workflows if asked → "Scan volley"
+   → Run workflow. The first run sends one message with the slots that are
+   free right now; after that, only new ones.
 
-## Cambiare cosa controlla
+## Changing what it watches
 
-Modifica `config.yaml` (anche direttamente dal sito di GitHub) e fai commit.
-Esempio: solo sabato e domenica dalle 13 in poi, a tutto campo.
+Edit `config.yaml` (you can do it right on the GitHub website) and commit.
+Example: only Saturday and Sunday from 13:00, full court.
 
 ```yaml
 gyms:
@@ -42,35 +42,33 @@ rules:
     rooms: [第一体育室（全面）]
 ```
 
-Più regole = uno slot viene segnalato se ne rispetta almeno una.
+With several rules, a slot is reported if it matches at least one of them.
 
-## Uso manuale
+## Running it by hand
 
-- **Da GitHub:** Actions → Scan volley → Run workflow.
-- **In locale, senza inviare niente:**
+- **On GitHub:** Actions → Scan volley → Run workflow.
+- **Locally, without sending anything:**
 
   ```bash
   python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
   .venv/bin/python -m bot --dry-run
   ```
 
-- **Test:** `.venv/bin/python -m pytest`
+- **Tests:** `.venv/bin/python -m pytest`
 
-## Se qualcosa non va
+## When something goes wrong
 
-- Se il portale non risponde per due giri di fila ti arriva
-  `⚠️ Volleyball bot failed` (al massimo una volta ogni 6 ore), con il link
-  al run; quando torna a funzionare arriva `✅ Volleyball bot is working again.`.
-  Un singolo errore isolato non manda niente. In quei run, tra gli artifact,
-  c'è `debug/` con l'ultima risposta del portale.
-- Questi errori del portale non fanno diventare rosso il run (altrimenti GitHub
-  ti manderebbe una email ogni 10 minuti). Il run diventa rosso, e GitHub ti
-  scrive, solo se non riesce a mandare messaggi su Telegram o se la config ha
-  un errore.
-- Una volta al mese il workflow "Keepalive" fa un commit vuoto: serve perché
-  GitHub spegne i workflow programmati dopo 60 giorni senza attività nel repo.
-  Se dovesse succedere lo stesso, riattivalo da Actions → Scan volley.
-- Durante la manutenzione del portale il bot salta il giro in silenzio.
-- **Ricominciare da zero** (ad esempio dopo aver cambiato molto la config):
-  Actions → Caches → cancella le voci `bot-state-*`. Al giro dopo arriva di
-  nuovo il messaggio con tutti gli slot liberi.
+- If the portal fails on two runs in a row you get `⚠️ Volleyball bot failed`
+  (at most once every 6 hours) with a link to the run; when it works again you
+  get `✅ Volleyball bot is working again.`. A single isolated error sends
+  nothing. Those runs keep the last portal response in the `debug` artifact.
+- These portal errors keep the run green (otherwise GitHub would email you
+  every 10 minutes). A run turns red, and GitHub emails you, only when it
+  cannot send to Telegram or when `config.yaml` has an error.
+- While the portal is in maintenance, the bot silently skips the run.
+- Once a month the "Keepalive" workflow pushes an empty commit: GitHub turns
+  off scheduled workflows after 60 days without repository activity. If it
+  happens anyway, re-enable it from Actions → Scan volley.
+- **Starting over** (for example after a big config change): Actions →
+  Caches → delete the `bot-state-*` entries. The next run sends the full list
+  of free slots again.
