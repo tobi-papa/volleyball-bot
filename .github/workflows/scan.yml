@@ -2,21 +2,22 @@ name: Scan volley
 
 on:
   schedule:
-    # toutes les 10 min de 7:00 à 23:50 heure japonaise (le cron de GitHub est en UTC, JST = UTC+9)
+    # Every 10 minutes from 7:00 to 23:50 Japan time.
+    # GitHub cron is UTC and JST = UTC+9: 22-23 UTC = 7-8 JST, 0-14 UTC = 9-23 JST.
     - cron: "*/10 22-23,0-14 * * *"
-  workflow_dispatch:   # ajoute un bouton "Run workflow" pour lancer à la main
+  workflow_dispatch:   # "Run workflow" button for manual runs
 
 permissions:
-  contents: write      # nécessaire pour enregistrer dispos_interessantes_passes.json
+  contents: read
 
 concurrency:
-  group: scan-volley   # jamais deux scans en même temps
+  group: scan-volley   # never two scans at the same time
   cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
@@ -25,40 +26,33 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Installer les dépendances
-        run: |
-          pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
+      - run: pip install -r requirements.txt
 
-      - name: Scan + analyse + notification
+      - name: Restore last state
+        uses: actions/cache/restore@v4
+        with:
+          path: state.json
+          key: bot-state-${{ github.run_id }}
+          restore-keys: bot-state-
+
+      - name: Scan and notify
         env:
-          LOGIN_ID: ${{ secrets.LOGIN_ID }}
-          LOGIN_PWD: ${{ secrets.LOGIN_PWD }}
-          NTFY_URL: ${{ secrets.NTFY_URL }}
-        run: python get_and_analyze.py
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m bot
 
-      - name: Enregistrer l'historique
-        run: |
-          if [ -f dispos_interessantes_passes.json ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898279+github-actions[bot]@users.noreply.github.com"
-            git add dispos_interessantes_passes.json
-            git diff --cached --quiet || (git commit -m "maj dispos" && git push)
-          fi
+      - name: Save state
+        if: always() && hashFiles('state.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: state.json
+          key: bot-state-${{ github.run_id }}
 
-      - name: Capture d'écran en cas d'erreur
+      - name: Keep the last portal response for debugging
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: erreur
-          path: erreur.png
+          name: debug
+          path: debug/
           if-no-files-found: ignore
-
-      - name: Alerte si le bot plante
-        if: failure()
-        env:
-          NTFY_URL: ${{ secrets.NTFY_URL }}
-        run: >
-          curl -H "Title: Volley bot FAILED" -H "Tags: warning"
-          -d "Run failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          "$NTFY_URL"
+          retention-days: 3
