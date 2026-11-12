@@ -16,8 +16,9 @@ from bot.slots import Slot, sort_slots
 @dataclass
 class State:
     slots: Optional[List[Slot]] = None      # None = never saw anything -> send a baseline
-    failing: bool = False
-    last_error_alert: Optional[datetime] = None
+    fail_count: int = 0                     # consecutive failed runs
+    alerted: bool = False                   # an error alert was sent during this failing streak
+    last_error_alert: Optional[datetime] = None   # kept across successes: limits flapping
 
 
 def load_state(path: Union[str, Path]) -> State:
@@ -30,7 +31,8 @@ def load_state(path: Union[str, Path]) -> State:
         alert = raw.get("last_error_alert")
         return State(
             slots=None if slots is None else [Slot.from_dict(d) for d in slots],
-            failing=bool(raw.get("failing", False)),
+            fail_count=int(raw.get("fail_count", 0)),
+            alerted=bool(raw.get("alerted", False)),
             last_error_alert=datetime.fromisoformat(alert) if alert else None,
         )
     except (ValueError, KeyError, TypeError, AttributeError) as e:
@@ -42,7 +44,8 @@ def save_state(state: State, path: Union[str, Path]) -> None:
     p = Path(path)
     data = {
         "slots": None if state.slots is None else [s.to_dict() for s in state.slots],
-        "failing": state.failing,
+        "fail_count": state.fail_count,
+        "alerted": state.alerted,
         "last_error_alert": state.last_error_alert.isoformat() if state.last_error_alert else None,
     }
     fd, tmp = tempfile.mkstemp(dir=p.parent if str(p.parent) else ".", prefix=".state-")

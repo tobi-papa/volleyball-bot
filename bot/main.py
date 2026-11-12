@@ -15,6 +15,8 @@ from bot.slots import apply_rules
 from bot.state import State, diff, load_state, save_state, should_alert
 from bot.telegram import send
 
+ALERT_AFTER_FAILURES = 2   # a single timeout does not ping anyone
+
 
 def _run_url() -> Optional[str]:
     server, repo, run_id = (os.environ.get(k) for k in ("GITHUB_SERVER_URL", "GITHUB_REPOSITORY", "GITHUB_RUN_ID"))
@@ -30,20 +32,25 @@ def run(config: Config, state_path: Path, *, fetch=fetch_slots,
         print("Portal is in maintenance: skipping this run.")
         return 0
     except Exception as e:
+        # Handled here: the Telegram alert is the channel, so the run itself stays green
+        # (a red run would also send a GitHub email every 10 minutes during an outage).
         err = f"{type(e).__name__}: {e}"
-        print(f"Run failed: {err}", file=sys.stderr)
-        state.failing = True
-        if should_alert(state, now, config.error_alert_every_hours):
+        print(f"::warning::Run failed: {err}")
+        state.fail_count += 1
+        code = 0
+        if state.fail_count >= ALERT_AFTER_FAILURES and should_alert(state, now, config.error_alert_every_hours):
             try:
                 notify(messages.error_message(err, _run_url()))
                 state.last_error_alert = now
+                state.alerted = True
             except Exception as send_err:
                 print(f"Could not send the error alert: {send_err}", file=sys.stderr)
+                code = 1   # Telegram is broken too: let GitHub tell the user
         save_state(state, state_path)
-        return 1
+        return code
 
     out: List[str] = []
-    if state.failing:
+    if state.alerted:
         out.append(messages.recovered_message())
     if state.slots is None:
         out.append(messages.baseline_message(slots))
@@ -62,7 +69,7 @@ def run(config: Config, state_path: Path, *, fetch=fetch_slots,
         print(f"Could not send to Telegram, state not saved: {e}", file=sys.stderr)
         return 1
 
-    save_state(State(slots=slots), state_path)
+    save_state(State(slots=slots, last_error_alert=state.last_error_alert), state_path)
     print(f"{len(slots)} matching free slot(s); {len(out)} message(s) sent.")
     return 0
 

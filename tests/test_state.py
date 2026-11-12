@@ -12,10 +12,11 @@ NOW = datetime(2026, 11, 12, 10, 0, tzinfo=timezone.utc)
 
 def test_roundtrip(tmp_path):
     p = tmp_path / "state.json"
-    save_state(State(slots=[A, B], failing=True, last_error_alert=NOW), p)
+    save_state(State(slots=[A, B], fail_count=2, alerted=True, last_error_alert=NOW), p)
     s = load_state(p)
     assert s.slots == [A, B]
-    assert s.failing is True
+    assert s.fail_count == 2
+    assert s.alerted is True
     assert s.last_error_alert == NOW
 
 

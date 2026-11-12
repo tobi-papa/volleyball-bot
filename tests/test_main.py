@@ -95,23 +95,45 @@ def test_no_change_message_when_enabled(tmp_path):
     assert len(inbox.sent) == 1 and "No change" in inbox.sent[0]
 
 
+def test_single_failure_is_silent(tmp_path):
+    p, inbox = tmp_path / "state.json", Inbox()
+    save_state(State(slots=[A]), p)
+    assert run(p, fetch_raising(PortalError("timeout")), inbox) == 0
+    assert inbox.sent == []
+    st = load_state(p)
+    assert st.slots == [A] and st.fail_count == 1
+
+
 def test_portal_error_keeps_state_and_alerts_once(tmp_path):
     p, inbox = tmp_path / "state.json", Inbox()
     save_state(State(slots=[A]), p)
-    assert run(p, fetch_raising(PortalError("E-203-000017")), inbox) == 1
-    assert run(p, fetch_raising(PortalError("E-203-000017")), inbox, now=NOW + timedelta(minutes=10)) == 1
+    for minutes in (0, 10, 20):
+        assert run(p, fetch_raising(PortalError("E-203-000017")), inbox, now=NOW + timedelta(minutes=minutes)) == 0
     assert len(inbox.sent) == 1 and inbox.sent[0].startswith("⚠️")
     st = load_state(p)
-    assert st.slots == [A] and st.failing is True
-    assert run(p, fetch_returning([A]), inbox, now=NOW + timedelta(minutes=20)) == 0
+    assert st.slots == [A] and st.fail_count == 3 and st.alerted is True
+    assert run(p, fetch_returning([A]), inbox, now=NOW + timedelta(minutes=30)) == 0
     assert inbox.sent[-1] == "✅ Volleyball bot is working again."
     st = load_state(p)
-    assert st.failing is False and st.last_error_alert is None
+    assert st.fail_count == 0 and st.alerted is False
+    assert st.last_error_alert == NOW + timedelta(minutes=10)   # kept: limits flapping
+
+
+def test_flapping_portal_alerts_at_most_once(tmp_path):
+    p, inbox = tmp_path / "state.json", Inbox()
+    save_state(State(slots=[A]), p)
+    t = 0
+    for _ in range(4):   # fail, fail, ok -> 30 min cycles over 2 hours
+        for fetch in (fetch_raising(PortalError("x")), fetch_raising(PortalError("x")), fetch_returning([A])):
+            run(p, fetch, inbox, now=NOW + timedelta(minutes=t))
+            t += 10
+    assert len(inbox.sent) == 2
+    assert inbox.sent[0].startswith("⚠️") and inbox.sent[1].startswith("✅")
 
 
 def test_error_alert_repeats_after_interval(tmp_path):
     p, inbox = tmp_path / "state.json", Inbox()
-    for minutes in (0, 10, 6 * 60):
+    for minutes in (0, 10, 20, 6 * 60 + 10):
         run(p, fetch_raising(PortalError("x")), inbox, now=NOW + timedelta(minutes=minutes))
     assert len(inbox.sent) == 2
 
@@ -119,7 +141,8 @@ def test_error_alert_repeats_after_interval(tmp_path):
 def test_error_on_first_run_then_baseline(tmp_path):
     p, inbox = tmp_path / "state.json", Inbox()
     run(p, fetch_raising(PortalError("x")), inbox)
-    run(p, fetch_returning([A]), inbox, now=NOW + timedelta(minutes=10))
+    run(p, fetch_raising(PortalError("x")), inbox, now=NOW + timedelta(minutes=10))
+    run(p, fetch_returning([A]), inbox, now=NOW + timedelta(minutes=20))
     assert inbox.sent[1] == "✅ Volleyball bot is working again."
     assert inbox.sent[2].startswith("🏐 Volleyball bot is running")
 
@@ -141,8 +164,10 @@ def test_telegram_failure_does_not_save(tmp_path):
 
 def test_telegram_failure_during_error_alert(tmp_path):
     p = tmp_path / "state.json"
-    assert run(p, fetch_raising(PortalError("x")), Inbox(fail=True)) == 1
-    assert load_state(p).last_error_alert is None   # retry the alert next time
+    assert run(p, fetch_raising(PortalError("x")), Inbox(fail=True)) == 0
+    assert run(p, fetch_raising(PortalError("x")), Inbox(fail=True), now=NOW + timedelta(minutes=10)) == 1
+    st = load_state(p)
+    assert st.last_error_alert is None and st.alerted is False   # retry the alert next time
 
 
 def test_corrupt_state_gives_baseline(tmp_path):

@@ -34,6 +34,9 @@ class Config:
 def _time(value, field: str) -> Optional[str]:
     if value in (None, ""):
         return None
+    if isinstance(value, int) and not isinstance(value, bool) and 0 <= value < 24 * 60:
+        # YAML 1.1 reads an unquoted 13:00 as 780 (minutes): turn it back into a time
+        value = f"{value // 60}:{value % 60:02d}"
     value = str(value).strip()
     if not _TIME.match(value):
         raise ValueError(f"config: {field} must look like 7:30 or 19:00, got {value!r}")

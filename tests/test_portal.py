@@ -217,3 +217,10 @@ def test_debug_dump_on_error(tmp_path, monkeypatch):
     with pytest.raises(PortalError):
         fetch_slots(5, ["Nonexistent"], session=FakeSession(), now=NOW)
     assert (tmp_path / "last_response.txt").exists()
+
+
+def test_month_without_configured_gym_is_error():
+    payload = month()
+    payload[1]["Horizontal"][0]["Common"]["FacilityName"] = "南スポーツセンター"
+    with pytest.raises(PortalError, match="港北"):
+        fetch_slots(5, [KOHOKU], session=FakeSession(month_payload=payload), now=NOW)

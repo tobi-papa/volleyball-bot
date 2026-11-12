@@ -260,6 +260,9 @@ def _flow(c: _Client, purpose: int, gyms: Sequence[str], start: date) -> List[Sl
     c.post("AvailabilityCheckApplySelectDays/GetAvailability", [], token)
     facs = parse_month(c.post("AvailabilityCheckApplySelectDays/SearchCondition",
                               search_condition_fields(start), token))
+    missing = {g.strip() for g in gyms} - {f.name.strip() for f in facs}
+    if missing:
+        raise PortalError(f"month: configured gym(s) missing from the table: {sorted(missing)}")
 
     slots: List[Slot] = []
     for fac in facs:

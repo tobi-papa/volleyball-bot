@@ -25,12 +25,7 @@ error_alert_every_hours: 6
 def test_repo_config_loads():
     c = load_config(ROOT / "config.yaml")
     assert isinstance(c, Config)
-    assert c.purpose == 5
-    assert c.gyms == ("港北スポーツセンター",)
-    assert c.rules == (Rule(),)
-    assert c.notify_gone is False
-    assert c.notify_no_change is False
-    assert c.error_alert_every_hours == 6
+    assert c.gyms and c.rules   # the user edits this file: only check that it loads
 
 
 def test_rule_fields_parsed(tmp_path):
@@ -66,3 +61,14 @@ def test_missing_rules_rejected(tmp_path):
     p = write(tmp_path, BASE)
     with pytest.raises(ValueError):
         load_config(p)
+
+
+def test_unquoted_time_accepted(tmp_path):
+    # YAML 1.1 reads an unquoted 13:00 as the number 780 (sexagesimal)
+    p = write(tmp_path, BASE + "rules:\n  - time_from: 13:00\n    time_to: 7:30\n")
+    r = load_config(p).rules[0]
+    assert (r.time_from, r.time_to) == ("13:00", "7:30")
+
+
+def test_readme_is_utf8():
+    (ROOT / "README.md").read_bytes().decode("utf-8")

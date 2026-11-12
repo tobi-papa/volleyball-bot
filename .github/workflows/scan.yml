@@ -49,7 +49,8 @@ jobs:
           key: bot-state-${{ github.run_id }}
 
       - name: Keep the last portal response for debugging
-        if: failure()
+        # handled portal errors keep the run green but leave debug/ behind
+        if: always() && hashFiles('debug/**') != ''
         uses: actions/upload-artifact@v4
         with:
           name: debug
