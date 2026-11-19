@@ -110,3 +110,10 @@ def test_list_message_multi_gym_shows_gym():
 def test_list_error_and_maintenance():
     assert list_error_message("PortalError: boom") == "⚠️ Could not read the portal: PortalError: boom"
     assert maintenance_message() == "🔧 The portal is in maintenance, try again later."
+
+
+def test_split_message_counts_utf16_units():
+    # Telegram counts UTF-16 code units; 🆕 is 2 units but 1 Python character
+    text = "\n".join("  🆕 13:00–15:00 · Gym 1 B (half) " + "x" * 10 for _ in range(200))
+    for part in split_message(text):
+        assert len(part.encode("utf-16-le")) // 2 <= 4096

@@ -144,3 +144,26 @@ test("health check and unknown paths", async () => {
   const nf = await worker.fetch(new Request("https://w.example/other"), makeEnv(), {});
   assert.equal(nf.status, 404);
 });
+
+test("network error reaching GitHub still gets a reply", async () => {
+  const env = makeEnv();
+  const calls = [];
+  const f = async (url, init = {}) => {
+    calls.push({ url, body: init.body ? JSON.parse(init.body) : undefined });
+    if (url.startsWith("https://api.github.com/")) throw new TypeError("fetch failed");
+    return new Response("{}", { status: 200 });
+  };
+  await handleUpdate(msg("/list"), env, { fetchImpl: f, now: 1 });
+  assert.equal(calls.at(-1).url, TG_URL);
+  assert.equal(calls.at(-1).body.text, "⚠️ Could not start the check, please try again in a minute.");
+  assert.equal(env.STATE._map.has("last_list_at"), false);
+});
+
+test("KV outage still gets a reply", async () => {
+  const env = makeEnv();
+  env.STATE.get = async () => { throw new Error("KV down"); };
+  const f = fakeFetch();
+  await handleUpdate(msg("/list"), env, { fetchImpl: f, now: 1 });
+  assert.equal(f.calls.at(-1).url, TG_URL);
+  assert.equal(f.calls.at(-1).body.text, "⚠️ Could not start the check, please try again in a minute.");
+});

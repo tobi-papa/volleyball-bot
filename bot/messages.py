@@ -96,18 +96,26 @@ def recovered_message() -> str:
     return "✅ Volleyball bot is working again."
 
 
+def _units(s: str) -> int:
+    """Length as Telegram counts it: UTF-16 code units (an emoji like 🆕 counts 2)."""
+    return len(s.encode("utf-16-le")) // 2
+
+
 def split_message(text: str, limit: int = LIMIT) -> List[str]:
     parts: List[str] = []
     current = ""
     for line in text.split("\n"):
-        while len(line) > limit:          # a single absurdly long line
+        while _units(line) > limit:          # a single absurdly long line
             if current:
                 parts.append(current)
                 current = ""
-            parts.append(line[:limit])
-            line = line[limit:]
+            cut = limit
+            while _units(line[:cut]) > limit:
+                cut -= 1
+            parts.append(line[:cut])
+            line = line[cut:]
         candidate = line if not current else current + "\n" + line
-        if len(candidate) > limit:
+        if _units(candidate) > limit:
             parts.append(current)
             current = line
         else:

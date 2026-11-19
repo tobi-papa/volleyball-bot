@@ -41,6 +41,11 @@ any other chat are ignored.
   every 3 minutes at most.
 - `/help` – the list of commands.
 
+If you add other bots to the group, write `/list@<this_bot>`: with Telegram's
+privacy mode a bot only receives a bare `/list` when it was the last bot to
+post in the group (or turn privacy off for this bot in @BotFather →
+`/setprivacy`).
+
 ## Cloudflare Worker (launcher)
 
 GitHub runs scheduled workflows on free repos far less often than asked (in

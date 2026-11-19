@@ -13,6 +13,7 @@ export const TEXT = {
   ack: "⏳ Checking the portal, the full list arrives in about a minute.",
   cooldown: "⏳ A list is already on its way.",
   dispatchError: (status) => `⚠️ Could not start the check (GitHub error ${status}).`,
+  startError: "⚠️ Could not start the check, please try again in a minute.",
   help: "🏐 Volleyball bot\n\n/list – full list of free courts right now (arrives in about a minute)\n/help – this message\n\nNew slots are also posted here automatically.",
 };
 
@@ -70,10 +71,16 @@ export async function handleUpdate(update, env, { fetchImpl = fetch, now = Date.
   if (command === "help") return sendTelegram(env, chatId, TEXT.help, fetchImpl);
   if (command !== "list") return;
 
-  const last = await env.STATE.get("last_list_at");
-  if (last !== null && now - Number(last) < COOLDOWN_MS) return sendTelegram(env, chatId, TEXT.cooldown, fetchImpl);
-
-  const status = await dispatch(env, "list", fetchImpl);
+  let status;
+  try {
+    const last = await env.STATE.get("last_list_at");
+    if (last !== null && now - Number(last) < COOLDOWN_MS) return sendTelegram(env, chatId, TEXT.cooldown, fetchImpl);
+    status = await dispatch(env, "list", fetchImpl);
+  } catch (err) {
+    // never leave a /list without an answer
+    console.error(`starting the list run failed: ${err && err.name}: ${err && err.message}`);
+    return sendTelegram(env, chatId, TEXT.startError, fetchImpl);
+  }
   if (status !== 204) {
     console.error(`workflow_dispatch(list) failed with HTTP ${status}`);
     return sendTelegram(env, chatId, TEXT.dispatchError(status), fetchImpl);
