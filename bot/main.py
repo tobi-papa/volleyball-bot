@@ -12,7 +12,7 @@ from bot import messages
 from bot.config import Config, load_config
 from bot.portal import SiteClosed, fetch_slots
 from bot.slots import apply_rules
-from bot.state import State, diff, load_state, save_state, should_alert
+from bot.state import State, diff, load_listed, load_state, save_listed, save_state, should_alert
 from bot.telegram import send
 
 ALERT_AFTER_FAILURES = 2   # a single timeout does not ping anyone
@@ -74,10 +74,46 @@ def run(config: Config, state_path: Path, *, fetch=fetch_slots,
     return 0
 
 
+def run_list(config: Config, state_path: Path, listed_path: Path, *, fetch=fetch_slots,
+             notify: Callable[[str], None], now: datetime) -> int:
+    """Someone asked /list: always answer, with the full availability or the error."""
+    prev = load_listed(listed_path)
+    try:
+        slots = apply_rules(fetch(config.purpose, config.gyms, now=now), config.rules)
+    except Exception as e:
+        text = (messages.maintenance_message() if isinstance(e, SiteClosed)
+                else messages.list_error_message(f"{type(e).__name__}: {e}"))
+        print(f"::warning::List failed: {text}")
+        try:
+            notify(text)
+        except Exception as send_err:
+            print(f"Could not send to Telegram: {send_err}", file=sys.stderr)
+            return 1
+        return 0
+
+    new_keys = set() if prev is None else {s.key for s in diff(prev, slots)[0]}
+    taken = [] if prev is None else diff(prev, slots)[1]
+    try:
+        notify(messages.list_message(slots, new_keys, taken, now, config.gyms))
+    except Exception as e:
+        print(f"Could not send to Telegram, state not saved: {e}", file=sys.stderr)
+        return 1
+
+    save_listed(slots, listed_path)
+    state = load_state(state_path)       # keep the scan's failure bookkeeping, refresh the slots
+    state.slots = slots
+    save_state(state, state_path)
+    print(f"Listed {len(slots)} free slot(s).")
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     ap = argparse.ArgumentParser(prog="python -m bot", description="Volleyball court availability bot")
     ap.add_argument("--config", default="config.yaml")
     ap.add_argument("--state", default="state.json")
+    ap.add_argument("--list-state", default="list_state.json")
+    ap.add_argument("--mode", choices=("scan", "list"), default="scan",
+                    help="scan: notify new slots; list: post the full availability (/list)")
     ap.add_argument("--dry-run", action="store_true", help="print messages instead of sending them")
     args = ap.parse_args(argv)
 
@@ -93,5 +129,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         def notify(text: str) -> None:
             send(text, token, chat_id)
 
-    return run(load_config(args.config), Path(args.state), fetch=fetch_slots,
-               notify=notify, now=datetime.now(timezone.utc))
+    config, now = load_config(args.config), datetime.now(timezone.utc)
+    if args.mode == "list":
+        return run_list(config, Path(args.state), Path(args.list_state), fetch=fetch_slots,
+                        notify=notify, now=now)
+    return run(config, Path(args.state), fetch=fetch_slots, notify=notify, now=now)

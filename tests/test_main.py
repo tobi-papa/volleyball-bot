@@ -190,3 +190,80 @@ def test_missing_secrets_fail_clearly(tmp_path, monkeypatch):
     monkeypatch.delenv("TELEGRAM_CHAT_ID", raising=False)
     with pytest.raises(SystemExit, match="TELEGRAM_BOT_TOKEN"):
         main_mod.main(["--state", str(tmp_path / "s.json")])
+
+
+# --- --mode list ------------------------------------------------------------
+
+from bot.state import load_listed, save_listed
+
+
+def run_list(tmp_path, fetch, inbox, now=NOW):
+    return main_mod.run_list(CFG, tmp_path / "state.json", tmp_path / "list_state.json",
+                             fetch=fetch, notify=inbox, now=now)
+
+
+def test_list_first_time_no_marks(tmp_path):
+    inbox = Inbox()
+    assert run_list(tmp_path, fetch_returning([A, B]), inbox) == 0
+    assert len(inbox.sent) == 1
+    assert inbox.sent[0].startswith("📋 Free now at Kohoku (2)")
+    assert "🆕" not in inbox.sent[0] and "Taken" not in inbox.sent[0]
+    assert load_listed(tmp_path / "list_state.json") == [A, B]
+    assert load_state(tmp_path / "state.json").slots == [A, B]
+
+
+def test_list_marks_new_and_taken(tmp_path):
+    inbox = Inbox()
+    save_listed([A], tmp_path / "list_state.json")
+    run_list(tmp_path, fetch_returning([B]), inbox)
+    assert "🆕 13:00–15:00" in inbox.sent[0]
+    assert "Taken since the last /list (1):" in inbox.sent[0]
+    assert "7:30–9:00 · Kohoku · Gym 1 A (half)" in inbox.sent[0]
+
+
+def test_list_then_scan_is_silent(tmp_path):
+    inbox = Inbox()
+    run_list(tmp_path, fetch_returning([A, B]), inbox)
+    assert run(tmp_path / "state.json", fetch_returning([A, B]), inbox) == 0
+    assert len(inbox.sent) == 1
+
+
+def test_list_keeps_failure_fields(tmp_path):
+    save_state(State(slots=[A], fail_count=3, alerted=True, last_error_alert=NOW), tmp_path / "state.json")
+    run_list(tmp_path, fetch_returning([A, B]), Inbox())
+    st = load_state(tmp_path / "state.json")
+    assert (st.slots, st.fail_count, st.alerted, st.last_error_alert) == ([A, B], 3, True, NOW)
+
+
+def test_list_portal_error_reports_immediately(tmp_path):
+    inbox = Inbox()
+    save_state(State(slots=[A]), tmp_path / "state.json")
+    before = (tmp_path / "state.json").read_text()
+    assert run_list(tmp_path, fetch_raising(PortalError("boom")), inbox) == 0
+    assert inbox.sent == ["⚠️ Could not read the portal: PortalError: boom"]
+    assert (tmp_path / "state.json").read_text() == before
+    assert not (tmp_path / "list_state.json").exists()
+
+
+def test_list_site_closed(tmp_path):
+    inbox = Inbox()
+    assert run_list(tmp_path, fetch_raising(SiteClosed()), inbox) == 0
+    assert inbox.sent == ["🔧 The portal is in maintenance, try again later."]
+
+
+def test_list_telegram_failure_saves_nothing(tmp_path):
+    assert run_list(tmp_path, fetch_returning([A]), Inbox(fail=True)) == 1
+    assert not (tmp_path / "list_state.json").exists()
+    assert not (tmp_path / "state.json").exists()
+
+
+def test_list_error_and_telegram_down_is_red(tmp_path):
+    assert run_list(tmp_path, fetch_raising(PortalError("boom")), Inbox(fail=True)) == 1
+
+
+def test_main_mode_list_dry_run(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(main_mod, "fetch_slots", fetch_returning([A]))
+    code = main_mod.main(["--dry-run", "--mode", "list", "--state", str(tmp_path / "s.json"),
+                          "--list-state", str(tmp_path / "l.json")])
+    assert code == 0
+    assert "📋 Free now" in capsys.readouterr().out
