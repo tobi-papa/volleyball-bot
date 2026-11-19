@@ -69,14 +69,20 @@ GitHub `schedule` stays in `scan.yml` as a fallback.
    Read and write** (nothing else). Expiration: 1 year. Copy the token.
 3. Create the KV store and put its id in `worker/wrangler.toml`
    (`[[kv_namespaces]] id`): `npx wrangler@4 kv namespace create STATE`.
-4. Add the secrets (each command asks for the value; paste it there, never in
-   a file or chat):
+4. Add the secrets. On a Mac, keep them in the Keychain so you never have to
+   look them up again (encrypted, unlocked by your Mac login, nothing written to
+   the repo), then send them to the Worker:
 
    ```bash
-   npx wrangler@4 secret put GITHUB_TOKEN
-   npx wrangler@4 secret put TELEGRAM_BOT_TOKEN
-   npx wrangler@4 secret put ALLOWED_CHAT_ID    # same value as the GitHub secret TELEGRAM_CHAT_ID
+   ./secrets.sh save   # asks for GITHUB_TOKEN, TELEGRAM_BOT_TOKEN, ALLOWED_CHAT_ID
+   ./secrets.sh push   # wrangler secret put for each of them
    ```
+
+   `ALLOWED_CHAT_ID` is the same value as the GitHub secret `TELEGRAM_CHAT_ID`.
+   Later: `./secrets.sh list` shows what is stored, `./secrets.sh copy NAME`
+   copies one key to the clipboard, `./secrets.sh save GITHUB_TOKEN` replaces
+   the token after renewing it. Without a Mac, run
+   `npx wrangler@4 secret put <NAME>` for each and paste the value at the prompt.
 
 5. Deploy: `npx wrangler@4 deploy`. It prints the Worker URL
    (`https://volleyball-bot-worker.<you>.workers.dev`); opening it shows `ok`.
@@ -94,8 +100,8 @@ GitHub `schedule` stays in `scan.yml` as a fallback.
   `-100…` number, also shown in the Worker log). Update both the GitHub secret
   `TELEGRAM_CHAT_ID` and the Worker secret `ALLOWED_CHAT_ID`.
 - The GitHub token expires after a year: `/list` then answers
-  `⚠️ Could not start the check (GitHub error 401).` Create a new token and run
-  `npx wrangler@4 secret put GITHUB_TOKEN` again.
+  `⚠️ Could not start the check (GitHub error 401).` Create a new token, then
+  `./secrets.sh save GITHUB_TOKEN && ./secrets.sh push`.
 
 ## Changing what it watches
 

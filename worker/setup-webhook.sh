@@ -9,8 +9,12 @@ set -euo pipefail
 URL="${1:?usage: $0 <worker-url>}"
 URL="${URL%/}"
 
-read -r -s -p "Telegram bot token: " TG
-echo
+if TG=$(security find-generic-password -s volleyball-bot -a TELEGRAM_BOT_TOKEN -w 2>/dev/null); then
+  echo "Using the bot token from the Keychain (./secrets.sh)"
+else
+  read -r -s -p "Telegram bot token: " TG
+  echo
+fi
 
 USERNAME=$(curl -fsS "https://api.telegram.org/bot${TG}/getMe" \
   | python3 -c 'import json,sys; print(json.load(sys.stdin)["result"]["username"])')
