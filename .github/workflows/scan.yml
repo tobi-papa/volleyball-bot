@@ -1,17 +1,27 @@
 name: Scan volley
 
 on:
+  # Main trigger: the Cloudflare Worker (worker/) dispatches this workflow every
+  # 10 minutes (mode=scan) and when someone writes /list in Telegram (mode=list).
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "scan = notify new slots, list = post the full availability"
+        type: choice
+        options: [scan, list]
+        default: scan
+  # Fallback only: GitHub runs scheduled workflows on free repos far less often
+  # than asked (about every 8 hours), so this just keeps the bot alive if the
+  # Worker stops. Every 10 minutes from 7:00 to 23:50 Japan time (UTC+9).
   schedule:
-    # Every 10 minutes from 7:00 to 23:50 Japan time.
-    # GitHub cron is UTC and JST = UTC+9: 22-23 UTC = 7-8 JST, 0-14 UTC = 9-23 JST.
     - cron: "*/10 22-23,0-14 * * *"
-  workflow_dispatch:   # "Run workflow" button for manual runs
 
 permissions:
   contents: read
 
 concurrency:
-  group: scan-volley   # never two scans at the same time
+  # one group per mode, so a pending scan never cancels a requested /list
+  group: scan-volley-${{ inputs.mode || 'scan' }}
   cancel-in-progress: false
 
 jobs:
@@ -32,21 +42,37 @@ jobs:
         uses: actions/cache/restore@v6
         with:
           path: state.json
-          key: bot-state-${{ github.run_id }}
+          key: bot-state-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: bot-state-
+
+      - name: Restore last /list
+        if: inputs.mode == 'list'
+        uses: actions/cache/restore@v6
+        with:
+          path: list_state.json
+          key: bot-list-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: bot-list-
 
       - name: Scan and notify
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -m bot
+          MODE: ${{ inputs.mode || 'scan' }}
+        run: python -m bot --mode "$MODE"
 
       - name: Save state
         if: always() && hashFiles('state.json') != ''
         uses: actions/cache/save@v6
         with:
           path: state.json
-          key: bot-state-${{ github.run_id }}
+          key: bot-state-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Save /list
+        if: always() && inputs.mode == 'list' && hashFiles('list_state.json') != ''
+        uses: actions/cache/save@v6
+        with:
+          path: list_state.json
+          key: bot-list-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Keep the last portal response for debugging
         # handled portal errors keep the run green but leave debug/ behind

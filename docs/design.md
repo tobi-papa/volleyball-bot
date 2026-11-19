@@ -183,3 +183,11 @@ Altro:
 - Test: parsing da fixture salvate (JSON del mese, HTML orari), filtri,
   diff tra stati, formattazione messaggi, alert limitati. Nessun test deve
   chiamare il sito vero; un comando a parte per una prova live.
+
+
+## Aggiornamento 2026-11-19: /list e lanciatore Cloudflare
+
+GitHub lanciava il cron solo ogni ~8 ore. Ora un Cloudflare Worker (`worker/`)
+lancia il workflow ogni 10 minuti via `workflow_dispatch` e riceve il comando
+Telegram `/list`, che fa partire un run `--mode list` con la lista completa.
+Design: `docs/superpowers/specs/2026-11-19-telegram-list-command-design.md`.
