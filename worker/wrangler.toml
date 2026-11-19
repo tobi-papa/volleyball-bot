@@ -1,0 +1,18 @@
+# Cloudflare Worker that launches the volleyball bot. Setup: see README ("Cloudflare Worker").
+# Secrets are NOT here (public repo): set them with `npx wrangler@4 secret put <NAME>`:
+#   TELEGRAM_BOT_TOKEN, GITHUB_TOKEN, WEBHOOK_SECRET, ALLOWED_CHAT_ID
+name = "volleyball-bot-worker"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[triggers]
+# every 10 minutes from 7:00 to 23:50 Japan time (cron is UTC, JST = UTC+9)
+crons = ["*/10 22-23,0-14 * * *"]
+
+[vars]
+GITHUB_REPO = "tobi-papa/volleyball-bot"
+BOT_USERNAME = ""   # filled in at deploy (Telegram username of the bot, without @)
+
+[[kv_namespaces]]
+binding = "STATE"
+id = ""             # filled in at deploy: npx wrangler@4 kv namespace create STATE
