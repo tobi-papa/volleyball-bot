@@ -51,3 +51,21 @@ def test_should_alert():
     assert should_alert(State(), NOW, 6) is True
     assert should_alert(State(last_error_alert=NOW - timedelta(hours=5)), NOW, 6) is False
     assert should_alert(State(last_error_alert=NOW - timedelta(hours=6)), NOW, 6) is True
+
+
+from bot.state import load_listed, save_listed
+
+
+def test_listed_roundtrip(tmp_path):
+    p = tmp_path / "list_state.json"
+    save_listed([B, A], p)
+    assert load_listed(p) == [A, B]
+
+
+def test_listed_missing_or_corrupt(tmp_path):
+    p = tmp_path / "list_state.json"
+    assert load_listed(p) is None
+    p.write_text("nope", encoding="utf-8")
+    assert load_listed(p) is None
+    save_listed([], p)
+    assert load_listed(p) == []

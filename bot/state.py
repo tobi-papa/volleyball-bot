@@ -66,3 +66,23 @@ def should_alert(state: State, now: datetime, every_hours: int) -> bool:
     if state.last_error_alert is None:
         return True
     return now - state.last_error_alert >= timedelta(hours=every_hours)
+
+
+def load_listed(path: Union[str, Path]) -> Optional[List[Slot]]:
+    """Slots shown by the previous /list; None if there was none (or the file is unreadable)."""
+    p = Path(path)
+    if not p.exists():
+        return None
+    try:
+        return sort_slots(Slot.from_dict(d) for d in json.loads(p.read_text(encoding="utf-8"))["slots"])
+    except (ValueError, KeyError, TypeError, AttributeError) as e:
+        print(f"warning: ignoring unreadable list state {p}: {e}", file=sys.stderr)
+        return None
+
+
+def save_listed(slots: Sequence[Slot], path: Union[str, Path]) -> None:
+    p = Path(path)
+    fd, tmp = tempfile.mkstemp(dir=p.parent if str(p.parent) else ".", prefix=".list-")
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        json.dump({"slots": [s.to_dict() for s in slots]}, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, p)

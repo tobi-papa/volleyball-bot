@@ -1,8 +1,9 @@
 """Telegram message texts (English, so they can be forwarded to the group)."""
 from __future__ import annotations
 
-from datetime import date
-from typing import Iterable, List, Optional, Sequence
+from datetime import date, datetime, timedelta, timezone
+from itertools import groupby
+from typing import Collection, Iterable, List, Optional, Sequence
 
 from bot.slots import Slot, sort_slots
 
@@ -29,6 +30,8 @@ ROOMS = [
     ("Ｂ", " B"),
     ("Ｃ", " C"),
 ]
+
+JST = timezone(timedelta(hours=9))
 
 _DAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 _MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -111,3 +114,30 @@ def split_message(text: str, limit: int = LIMIT) -> List[str]:
             current = candidate
     parts.append(current)
     return parts
+
+
+def list_message(slots: Sequence[Slot], new_keys: Collection[tuple], taken: Sequence[Slot],
+                 checked_at: datetime, gyms: Sequence[str]) -> str:
+    """Full availability for /list, grouped by day. 🆕 and 'Taken' are relative to the previous /list."""
+    hour = checked_at.astimezone(JST)
+    out = [f"📋 Free now at {', '.join(gym_en(g) for g in gyms)} ({len(slots)}) · checked {hour.hour}:{hour.minute:02d} JST"]
+    show_gym = len(gyms) > 1
+    if not slots:
+        out += ["", "No free slots right now."]
+    for day, group in groupby(sort_slots(slots), key=lambda s: s.date):
+        out += ["", date_en(day)]
+        for s in group:
+            mark = "🆕 " if s.key in new_keys else ""
+            where = f"{gym_en(s.gym)} · {room_en(s.room)}" if show_gym else room_en(s.room)
+            out.append(f"  {mark}{s.start}–{s.end} · {where}")
+    if taken:
+        out += ["", f"Taken since the last /list ({len(taken)}):"] + [f"  {line}" for line in _lines(taken)]
+    return "\n".join(out + ["", f"Book: {PORTAL_URL}"])
+
+
+def list_error_message(err: str) -> str:
+    return f"⚠️ Could not read the portal: {err}"
+
+
+def maintenance_message() -> str:
+    return "🔧 The portal is in maintenance, try again later."

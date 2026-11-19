@@ -60,3 +60,53 @@ def test_split_message():
     assert all(len(p) <= 4096 for p in parts)
     assert "\n".join(parts) == text
     assert split_message("short") == ["short"]
+
+
+# --- /list ------------------------------------------------------------------
+
+from datetime import datetime, timezone
+
+from bot.messages import list_error_message, list_message, maintenance_message
+
+LA = Slot("2026-11-30", "7:30", K, "第一体育室Ａ（半面）", "9:00")
+LB = Slot("2026-11-30", "13:00", K, "第一体育室Ｂ（半面）", "15:00")
+LC = Slot("2026-12-01", "7:30", K, "第一体育室（全面）", "9:00")
+CHECKED = datetime(2026, 11, 19, 5, 5, tzinfo=timezone.utc)
+
+
+def test_list_message_groups_by_day():
+    msg = list_message([LC, LB, LA], {LC.key}, [], CHECKED, (K,))
+    lines = msg.splitlines()
+    assert lines[0] == "📋 Free now at Kohoku (3) · checked 14:05 JST"
+    i = lines.index("Mon 30 Nov 2026")
+    assert lines[i + 1] == "  7:30–9:00 · Gym 1 A (half)"
+    assert lines[i + 2] == "  13:00–15:00 · Gym 1 B (half)"
+    j = lines.index("Tue 1 Dec 2026")
+    assert lines[j + 1] == "  🆕 7:30–9:00 · Gym 1 (full)"
+    assert "Taken since" not in msg
+    assert PORTAL_URL in lines[-1]
+
+
+def test_list_message_taken_section():
+    msg = list_message([LA], set(), [LB], CHECKED, (K,))
+    assert "Taken since the last /list (1):" in msg
+    assert "  Mon 30 Nov 2026 · 13:00–15:00 · Kohoku · Gym 1 B (half)" in msg.splitlines()
+
+
+def test_list_message_empty():
+    msg = list_message([], set(), [], CHECKED, (K,))
+    assert msg.splitlines()[0] == "📋 Free now at Kohoku (0) · checked 14:05 JST"
+    assert "No free slots right now." in msg
+
+
+def test_list_message_multi_gym_shows_gym():
+    other = Slot("2026-11-30", "9:00", "緑スポーツセンター", "第一体育室（全面）", "11:00")
+    msg = list_message([LA, other], set(), [], CHECKED, (K, "緑スポーツセンター"))
+    assert msg.splitlines()[0].startswith("📋 Free now at Kohoku, Midori (2)")
+    assert "  7:30–9:00 · Kohoku · Gym 1 A (half)" in msg.splitlines()
+    assert "  9:00–11:00 · Midori · Gym 1 (full)" in msg.splitlines()
+
+
+def test_list_error_and_maintenance():
+    assert list_error_message("PortalError: boom") == "⚠️ Could not read the portal: PortalError: boom"
+    assert maintenance_message() == "🔧 The portal is in maintenance, try again later."
